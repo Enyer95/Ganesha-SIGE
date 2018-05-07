@@ -1,0 +1,7 @@
+/public/storage
+/storage/*.key
+/vendor
+Homestead.json
+Homestead.yaml
+.env
+.phpintel
