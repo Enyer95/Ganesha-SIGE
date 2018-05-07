@@ -81,12 +81,17 @@ class ModelMineria extends Model
       }
     }
 
-    $datos= [$discretizacion ,$mediaIns, $mediaUse ,$mediaSec ,$mediaUni,$mediaNota];
+    #$datos= [$discretizacion ,$mediaIns, $mediaUse ,$mediaSec ,$mediaUni,$mediaNota];
 
-    return $datos;
+    return $discretizacion;
   }
 
   public static function discre($cabeceras,$cantidad,$discretizacion){
+    $mediaIns= 0;
+$mediaUse= 0;
+$mediaSec= 0;
+$mediaUni= 0;
+$mediaNota= 0;
     foreach ($cabeceras as $cabecera) {
       if ($cabecera == 'id_inst_eva') {
         $counIns = 1;

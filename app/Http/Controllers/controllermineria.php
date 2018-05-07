@@ -25,11 +25,9 @@ class controllermineria extends Controller
 		$cantidad=$request->maximo-$request->minimo;
 		$results = DB::select('SELECT '.$request->newQuery.' OFFSET '.$request->minimo.' ROWS FETCH NEXT '.$cantidad.' ROWS ONLY;');
 		$discretizacion = ModelMineria::discretizacion($cabeceras,$cantidad,DB::select('SELECT '.$request->newQuery.' OFFSET '.$request->minimo.' ROWS FETCH NEXT '.$cantidad.' ROWS ONLY;'));
-		#dd($discretizacion);
 		$normalizacion = ModelMineria::discre($cabeceras,$cantidad,DB::select('SELECT '.$request->newQuery.' OFFSET '.$request->minimo.' ROWS FETCH NEXT '.$cantidad.' ROWS ONLY;'));
-		#dd($discretizacion[0]->cod_seccion);
 
-		return view('Mineria/Mostrar_mineria')->with(['discretizacion' => $discretizacion[0],'normal'=>$results,'normalizacion'=>$normalizacion,'celdas'=>$cabeceras]);
+		return view('Mineria/Mostrar_mineria')->with(['discretizacion' => $discretizacion,'normal'=>$results,'normalizacion'=>$normalizacion,'celdas'=>$cabeceras]);
 
 	}
 }
