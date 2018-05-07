@@ -26,7 +26,7 @@
                             </li>
                           </ol>
                         </section><br><hr>
-                        
+
                         <div class="card-content">
 
                           <form action="{{ url('/minaValores') }}" method="POST" role="form" class="form-horizontal form-simple">
@@ -67,7 +67,7 @@
                                             <label for="uni_crr">
                                               Inserte Rango
                                             </label> <br>
-                                            <input type="number" min="0" id="minimo" name="minimo" required> 
+                                            <input type="number" min="0" id="minimo" name="minimo" required>
                                                 hasta
                                             <input type="number" min="0" id="maximo" name="maximo" required>
 
@@ -84,9 +84,9 @@
                         </div><!--card-->
                     </div><!--col-->
                 </div><!--row-->
-            </div><!--container--> 
-        </div><!--content--> 
-    </div><!--content--> 
+            </div><!--container-->
+        </div><!--content-->
+    </div><!--content-->
 @endsection
 
 @section('customjs')
