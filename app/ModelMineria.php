@@ -86,6 +86,80 @@ class ModelMineria extends Model
     return $datos;
   }
 
+  public static function discre($cabeceras,$cantidad,$discretizacion){
+    foreach ($cabeceras as $cabecera) {
+      if ($cabecera == 'id_inst_eva') {
+        $counIns = 1;
+        $sumaIns = 0;
+
+        foreach (ModelInstrumento::all() as $instrumento) {
+          foreach ($discretizacion as $discretiza) {
+            if ($discretiza->id_inst_eva == $instrumento->id_inst) {
+              $discretiza->id_inst_eva = $counIns;
+              $sumaIns= $sumaIns + $discretiza->id_inst_eva;
+            }
+          }
+          $counIns++;
+        }
+        $mediaIns = $sumaIns/$cantidad;
+      }
+      if ($cabecera == 'id_usu') {
+        $counUse = 1;
+        $sumaUse = 0;
+
+        foreach (User::all() as $user) {
+          foreach ($discretizacion as $discretiza) {
+            if ($discretiza->id_usu == $user->id) {
+              $discretiza->id_usu = $counUse;
+              $sumaUse= $sumaUse + $discretiza->id_usu;
+            }
+          }
+          $counUse++;
+        }
+        $mediaUse = $sumaUse/$cantidad;
+      }
+      if ($cabecera == 'cod_seccion') {
+        $counSec = 1;
+        $sumaSec = 0;
+        foreach (ModelSeccion::all() as $seccion) {
+          foreach ($discretizacion as $discretiza) {
+            if ($discretiza->cod_seccion == $seccion->cod_sec) {
+              $discretiza->cod_seccion = $counSec;
+              $sumaSec= $sumaSec + $discretiza->cod_seccion;
+            }
+          }
+
+          $counSec++;
+        }
+        $mediaSec = $sumaSec/$cantidad;
+      }
+      if ($cabecera == 'cod_unidad') {
+        $sumaUni = 0;
+        $counUni = 1;
+        foreach (ModelUnidadCurricular::all() as $unidad) {
+          foreach ($discretizacion as $discretiza) {
+            if ($discretiza->cod_unidad == $unidad->cod_uc_pnf){
+              $discretiza->cod_unidad = $counUni;
+              $sumaUni= $sumaUni + $discretiza->cod_unidad;
+            }
+          }
+          $counUni++;
+        }
+        $mediaUni = $sumaUni/$cantidad;
+      }
+      if ($cabecera == 'nota') {
+        $sumaNot = 0;
+          foreach ($discretizacion as $discretiza) {
+              $sumaNot= $sumaNot + $discretiza->nota;
+          }
+        $mediaNota = $sumaNot/$cantidad;
+      }
+    }
+
+    $datos= [$discretizacion ,$mediaIns, $mediaUse ,$mediaSec ,$mediaUni,$mediaNota];
+
+    return   ModelMineria::normalizacion($cantidad,$datos,$cabeceras);;
+  }
   public static function normalizacion($cantidad,$valores,$cabeceras){
     $n=$cantidad-1;
     $sumaVarianzaUse = 0;

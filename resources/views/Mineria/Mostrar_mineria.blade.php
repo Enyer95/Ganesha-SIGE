@@ -27,7 +27,7 @@
                             </li>
                           </ol>
                         </section><br><hr>
-                        
+
                         <div class="card-content">
                             <div >
                                 <label> Tabla Normal</label>
@@ -121,14 +121,60 @@
                                             @endforeach
                                         </tbody>
                                     @endif
+                                </table><br>
+                                <label> Tabla Normalizada</label>
+                                <table id="Norma" class="table table-bordered table-responsive">
+                                    @if(isset($normalizacion) )
+
+                                        <thead>
+                                            <th>id</th>
+                                            @foreach($celdas as $c)
+                                                <th>{{ $c }}</th>
+                                            @endforeach
+                                       </thead>
+                                        <tbody>
+                                            @foreach($normalizacion as $val => $d)
+                                                <tr>
+                                                    <td>{{ $val }}</td>
+                                                    @foreach($celdas as $c)
+                                                        @if ($c == 'cod_seccion')
+                                                            <td>
+                                                                {{ $d-> cod_seccion}}
+                                                            </td>
+                                                        @endif
+                                                        @if ($c == 'cod_unidad')
+                                                            <td>
+                                                                {{ $d-> cod_unidad}}
+                                                            </td>
+                                                        @endif
+                                                        @if ($c == 'id_usu')
+                                                            <td>
+                                                                {{ $d-> id_usu}}
+                                                            </td>
+                                                        @endif
+                                                        @if ($c == 'nota')
+                                                            <td>
+                                                                {{ $d-> nota}}
+                                                            </td>
+                                                        @endif
+                                                        @if ($c == 'id_inst_eva')
+                                                            <td>
+                                                                {{ $d-> id_inst_eva}}
+                                                            </td>
+                                                        @endif
+                                                    @endforeach
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    @endif
                                 </table>
                             </div>
                         </div><!--card-->
                     </div><!--col-->
                 </div><!--row-->
-            </div><!--container--> 
-        </div><!--content--> 
-    </div><!--content--> 
+            </div><!--container-->
+        </div><!--content-->
+    </div><!--content-->
 @endsection
 
 @section('customjs')
@@ -149,7 +195,7 @@
                        "loadingRecords": "Por favor Espere Estamos Buscando Registros",
                        "processing": "Procesando sus datos",
                         "lengthMenu": "Cantidad de Registros _MENU_"
-                     },      
+                     },
 
         });
         //oTable.fnDestroy();
@@ -166,7 +212,22 @@
                        "loadingRecords": "Por favor Espere Estamos Buscando Registros",
                        "processing": "Procesando sus datos",
                         "lengthMenu": "Cantidad de Registros _MENU_"
-                     },      
+                     },
+        });
+        var oTable=$('#Norma').DataTable({
+        scrollY:        '30vh',
+        scrollCollapse: true,
+        paging:         false,
+            "language": {
+                       "info": "Se Encontro _TOTAL_ Registros",
+                       "search": "Buscar Registro:",
+                       "infoFiltered": " - De _MAX_ Posibles",
+                       "zeroRecords": "No Se ha Encontrado el Docente",
+                       "infoEmpty": "Registros _TOTAL_",
+                       "loadingRecords": "Por favor Espere Estamos Buscando Registros",
+                       "processing": "Procesando sus datos",
+                        "lengthMenu": "Cantidad de Registros _MENU_"
+                     },
         });
     });
 </script>
