@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{{ url('/css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ url('/css/_all-skins.css') }}">
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url('/css/font-awesome/css/font-awesome.min.css') }}">
 
   <link rel="stylesheet" href="{{ url('/css/select2.css') }}">
   <style media="print" type="text/css">
@@ -28,9 +29,9 @@ body * { visibility: hidden; }
 </style>
 
   @yield('customcss')
-    
+
 </head>
-<body>  
+<body>
 
     <div class="wrapper ">
       <header class='main-header'>
@@ -45,8 +46,8 @@ body * { visibility: hidden; }
                   Sistema de Informacion Para la Gestion de Evaluaciones GANESHA |SIGE|
                 </h4>
               </font>
-            </a>  
-        
+            </a>
+
             <a class="navbar-brand">
 <img class='logotype img-responsive' src='{{ url('/img/logo.png') }}' alt="Responsive image" style="max-width: 50px; max-height: 50px;">
             </a>
@@ -56,14 +57,14 @@ body * { visibility: hidden; }
                   UPTAEB
                 </h4>
               </font>
-            </a>  
+            </a>
                       <div class="col-md-2"></div>
 
             <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
                 <li class="dropdown">
-                  <a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-                    <font color="white">Ayuda<span class="caret"></span></font> 
+                  <a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <font color="white">Ayuda<span class="caret"></span></font>
                   </a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a target="_blank" href="{{ url('/docs/Manual de Usuario.pdf') }}">Manual de usuario</a></li>
@@ -77,7 +78,7 @@ body * { visibility: hidden; }
       </header>
 
     <div class="content-wrapper ">
-    
+
       <Br><Br><Br>
       @yield('content')
       {{-- Contenido dentro del body --}}
@@ -87,7 +88,12 @@ body * { visibility: hidden; }
   <script src="{{ url('/js/jquery.js') }}"></script>
   <script src="{{ url('/js/bootstrap.js') }}"></script>
   <script src="{{ url('/js/functions.js') }}"></script>
+  <script>
+  $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+  });
+  </script>
 @yield('customjs')
-  
+
 </body>
 </html>

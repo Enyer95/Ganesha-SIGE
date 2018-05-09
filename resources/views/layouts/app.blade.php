@@ -253,7 +253,7 @@
     }
     toastr.{{ session('tipoMsj') }}('{{ session('msj') }}', '{{ session('titulo') }}');
   @endif
-
+ 
   function route(check) {
     route= check.id;
     input= $('#route');

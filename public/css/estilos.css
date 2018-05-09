@@ -1,3 +1,8 @@
+.quest{
+color: #D9534F;
+float: right;
+}
+
 
 /*Para los modales pequeños*/
     .modal-dialogs {
@@ -13,7 +18,7 @@
 
 .borde{
 	border: 2px solid #666;
-height: 70px; 
+  height: 70px;
   width: 387px;
   background: rgba(0, 0, 0, 0.1);
   border-radius: 6px;
@@ -85,7 +90,7 @@ background:#367fa9;
 
 .register-backgrounds {
   background-color: rgba(0, 0, 0, 0.5);
-  min-height: 100vh;
+  height: 100%;
   overflow: hidden;
   position: absolute;
   width: 100%;
