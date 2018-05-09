@@ -27,15 +27,15 @@
                                 Gestion de Secciones
                             </li>
                           </ol>
+
                         </section><hr>
+                        @include('flash::message')
+                        @if($cuentauc>3)
+                        <button type='button' class='btn btn-primary btn-xs col-md-offset-11' data-toggle='modal' data-target='#ModalAgregar'>
+                          Agregar
+                        </button>
+                        @endif
                         <div class="card-content">
-                            
-                            @if($cuentauc>3)
-                           
-                                <button type='button' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#ModalAgregar'> 
-                                    Agregar
-                                </button>
-                                </div><!--fin colcard-->
 
                             @include('Secciones.Listar_sec')
                         </div>
@@ -49,31 +49,21 @@
         </div>
     </div>
 
-    @else
+    @if($cuentauc< 3)
      <div class="col-md">
-                                <h2>Debe registrar primero las unidades curriculares min(4)</h2>
-                                </div><!--fin colcard-->
-                                   </div>
-                        <!-- /#ion-icons -->
-                    </div>
-                    <!-- /.tab-content -->
-                </div>
-                <!-- /.nav-tabs-custom -->
-            </div>
-            <!-- /.col -->
-        </div>
-    </div>                
+      <h2>Debe registrar primero las unidades curriculares min(4)</h2>
+      </div><!--fin colcard-->
 @endif
-                        
+
    @endsection
 @section('customjs')
-<script>                        
+<script>
 
     function verifico(check){
         {{-- id="eliminar" onclick="verifico(this)" --}}
         if (confirm("¿Desea Eliminar La Seccion?\nRecuerde que esto puede traer Perdida de Informacion") == true) {
         } else {
-            event.preventDefault();        
+            event.preventDefault();
         }
     }
 
@@ -84,22 +74,22 @@ $('#todas').click(function() {
 });
 
 $('#select').click(function() {
-    $('#selec').attr("checked", false); 
-     $('#todas').attr("required", true); 
+    $('#selec').attr("checked", false);
+     $('#todas').attr("required", true);
    $('#d').remove();
 });
 
-   function Seccion(check) {        
+   function Seccion(check) {
         tray = $('#select').val();
         checka = check.id;
-        element = document.getElementById("divUC");    
+        element = document.getElementById("divUC");
 
         if (checka == 'selec') {
             if (check.checked) {
                 element.style.display='block';
                 if (tray == 0) {
 
-                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+     
+                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+
                                 '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                                     '@if(isset($uni_crr) )'+
                                         '@foreach($uni_crr as $uc)'+
@@ -115,7 +105,7 @@ $('#select').click(function() {
                 }
                 if (tray == 1) {
 
-                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+     
+                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+
                                 '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                                     '@if(isset($uni_crr) )'+
                                         '@foreach($uni_crr as $uc)'+
@@ -131,7 +121,7 @@ $('#select').click(function() {
                 }
                 if (tray == 2) {
 
-                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+     
+                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+
                                 '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                                     '@if(isset($uni_crr) )'+
                                         '@foreach($uni_crr as $uc)'+
@@ -147,7 +137,7 @@ $('#select').click(function() {
                 }
                 if (tray == 3) {
 
-                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+     
+                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+
                                 '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                                     '@if(isset($uni_crr) )'+
                                         '@foreach($uni_crr as $uc)'+
@@ -163,7 +153,7 @@ $('#select').click(function() {
                 }
                 if (tray == 4) {
 
-                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+     
+                    var selet = '<div id="d"><label>Unidades Curriculares</label>'+
                                 '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                                     '@if(isset($uni_crr) )'+
                                         '@foreach($uni_crr as $uc)'+
@@ -195,7 +185,7 @@ function tray(check) {
 
 
         if (trayNew == 0) {
-            var selet = '<div class="de"><label>Unidades Curriculares</label>'+     
+            var selet = '<div class="de"><label>Unidades Curriculares</label>'+
                         '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                             '@if(isset($uni_crr) )'+
                                 '@foreach($uni_crr as $uc)'+
@@ -211,7 +201,7 @@ function tray(check) {
         }
         if (trayNew == 1) {
 
-            var selet = '<div class="de"><label>Unidades Curriculares</label>'+     
+            var selet = '<div class="de"><label>Unidades Curriculares</label>'+
                         '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                             '@if(isset($uni_crr) )'+
                                 '@foreach($uni_crr as $uc)'+
@@ -227,7 +217,7 @@ function tray(check) {
         }
         if (trayNew == 2) {
 
-            var selet = '<div class="de"><label>Unidades Curriculares</label>'+     
+            var selet = '<div class="de"><label>Unidades Curriculares</label>'+
                         '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                             '@if(isset($uni_crr) )'+
                                 '@foreach($uni_crr as $uc)'+
@@ -243,7 +233,7 @@ function tray(check) {
         }
         if (trayNew == 3) {
 
-            var selet = '<div class="de"><label>Unidades Curriculares</label>'+     
+            var selet = '<div class="de"><label>Unidades Curriculares</label>'+
                         '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                             '@if(isset($uni_crr) )'+
                                 '@foreach($uni_crr as $uc)'+
@@ -259,7 +249,7 @@ function tray(check) {
         }
         if (trayNew == 4) {
 
-            var selet = '<div class="de"><label>Unidades Curriculares</label>'+     
+            var selet = '<div class="de"><label>Unidades Curriculares</label>'+
                         '<select class="select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]" required>'+
                             '@if(isset($uni_crr) )'+
                                 '@foreach($uni_crr as $uc)'+
@@ -274,7 +264,7 @@ function tray(check) {
             $(".select2").select2();
 
         }
-    
+
  }
  function tomo(e) {
     trayViejo = e.value;

@@ -5,7 +5,7 @@ namespace GaneshaSIGE\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use GaneshaSIGE\ModelEstudiante;
-use Illuminate\Support\Facades\Mail; 
+use Illuminate\Support\Facades\Mail;
 use \Auth as Auth;
 use GaneshaSIGE\ModelSeccion;
 use GaneshaSIGE\ModelUnidadCurricular;
@@ -29,8 +29,8 @@ class controlleralumnos extends Controller
 {
     /////////  MOSTRAR DATOS    ///////////////////
     public function mostrar()
-    {  
-        $id = Auth::user() -> id; 
+    {
+        $id = Auth::user() -> id;
         $master = DB::table('mpuentemasters')->where('cod_seccion', '!=', 'NULL')->where('id_usu', $id)->get();
         $unidadex=DB::table('muni_crrs')->select('nom_uc');
 
@@ -42,7 +42,7 @@ class controlleralumnos extends Controller
 
     public function verifica(Request $request, $id_uc_sec)
     {
-        $id = Auth::user() -> id; 
+        $id = Auth::user() -> id;
         $tipo = $request->Tipo;
         $busqueda=DB::table('msec_ests')->where('id_master', $id_uc_sec)->get();
         //$busqueda= array_flatten($busqueda);
@@ -59,7 +59,7 @@ class controlleralumnos extends Controller
             }
             else{
 
-                $alumnos= ModelEstudiante::all();             
+                $alumnos= ModelEstudiante::all();
                 $busque=DB::table('msec_ests')->where('id_master', '!=' ,$id_uc_sec)->get();
 
                 Flash::warning('Ya hay Alumnos Para esta Seccion!<br>¿Desea Actualizarlos? <br>!!Si agrega un nuevo estudiante para la seccion y ya a pasado notas para alguna evaluación, a este se le asignara por defecto 0. <br>Si desea cambiarlo dirijase a la Gestion de notas');
@@ -84,12 +84,12 @@ class controlleralumnos extends Controller
     ///////////////////////////////FUNCION AUTOMATICA EXCEL CSV/////////////////////
 
     public function archivo(Request $request)
-    {   
-        $idbit = Auth::user() -> ci_usu;       
+    {
+        $idbit = Auth::user() -> ci_usu;
         $nom=Auth::user() -> name;
         $ape=Auth::user() -> ape_usu;
         $name=$nom.' '.$ape.'';
-        //obtengo dir del archivo//               
+        //obtengo dir del archivo//
         $path = $request->file('import_file')->getRealPath();
         //leo el archivo cargandolo en el componente
         $data = Excel::load($path, function($reader) {})->get();
@@ -98,7 +98,7 @@ class controlleralumnos extends Controller
         $valid=$request->Email;
         #dd($valid);
         if(!empty($data) && $data->count())
-        {   
+        {
          // dd($data->toArray());
             //recorro la data del archivo y asigno cada celda a un
             //arreglo con cabeceras iguales a la bd
@@ -118,10 +118,10 @@ class controlleralumnos extends Controller
             $contador=count($estudiantes);
 
             //si existen estudiantes comienzo a validar
-            if($contador!=0) 
+            if($contador!=0)
             {
                 foreach ($insert as $estuarchivo){
-                    
+
                     $buscame=$estuarchivo['ci_est'];
                     //dd($buscame);
                     $encuentra=DB::table('mestudiantes')->where('ci_est', $buscame)->pluck('ci_est');
@@ -133,7 +133,7 @@ class controlleralumnos extends Controller
                           DB::table('mestudiantes')->insert($estuarchivo);
                           //dd($estuarchivo);
                         $secvalidd=$request->id_cod;
-                                    
+
                         $plandetectado=ModelPlandeEvaluacion::where('cod_sec_plan',$secvalidd)->first();
                         //dd($plandetectado);
                           $evas=ModelEvaluacion::where('id_plan_eva',$plandetectado->id_plan)->get();
@@ -159,22 +159,22 @@ class controlleralumnos extends Controller
                               else{
 
                                  # code...
-                               } 
+                               }
                             }
                             //dd($NotasAsignadas,$cuentaNotas);
                           }
                         }
                         //GUARDO EN BITACORA///
-                             $accion='subir.listado'; 
+                             $accion='subir.listado';
 
                               $bitacora= new ModelBitacora;
-                              $observacion='alumno registrado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est']; 
+                              $observacion='alumno registrado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est'];
 
                               $bitacora->registra($idbit,$accion,$observacion,$name);
 
-                              ////////////////////////////////    
+                              ////////////////////////////////
 
-                          
+
                         }
 
                         else{
@@ -187,45 +187,45 @@ class controlleralumnos extends Controller
                          if($valid==='FALSE'){
                           DB::table('mestudiantes')->where('ci_est', $buscame)->update(['nom_est'=>$estuarchivo['nom_est'],'ape_est'=>$estuarchivo['ape_est'],'email'=>'NULL']);
                          }
-                        
+
                         //GUARDO EN BITACORA///
                               $bitacora= new ModelBitacora;
-                                $accion='modificar.listado'; 
+                                $accion='modificar.listado';
 
-                              $observacion='alumno actualizado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est']; 
+                              $observacion='alumno actualizado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est'];
 
                               $bitacora->registra($idbit,$accion,$observacion,$name);
 
-                              ////////////////////////////////    
+                              ////////////////////////////////
                         }
 
-                }   
+                }
             }
             else{
                 //sino existen estudiantes aun, agrego el listado completo
-                 DB::table('mestudiantes')->insert($insert); 
+                 DB::table('mestudiantes')->insert($insert);
                  foreach ($insert as $estuarchivo){
                  //GUARDO EN BITACORA///
-                             $accion='subir.listado'; 
+                             $accion='subir.listado';
 
                               $bitacora= new ModelBitacora;
-                              $observacion='alumno registrado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est']; 
+                              $observacion='alumno registrado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est'];
 
                               $bitacora->registra($idbit,$accion,$observacion,$name);
 
-                              //////////////////////////////// 
-                              }   
+                              ////////////////////////////////
+                              }
             }
 
 
                 //creo nuevo array para insersion en tabla puente
                 foreach ($data->toArray() as $key => $value) {
                 $insert2[] = ['ci_est_tes' => $value['cedula'],'id_master' => $request->id_cod,];
-        
+
                 }
 
             //verifico si el archivo no esta vacio
-            if(!empty($insert)){     
+            if(!empty($insert)){
                 $puente=DB::table('msec_ests')->where('id_master', $request->id_cod)->get();
 
                 $var=count($puente);
@@ -236,14 +236,14 @@ class controlleralumnos extends Controller
                             //traigo nombre de la unidad que ya existe
                             $cod=$request->id_cod;
                             $cod_uc=DB::table('mpuentemasters')->where('id_uc_sec', $cod)->pluck('cod_unidad');
-                            
+
                             $name=ModelUnidadCurricular::find($cod_uc[0]);
 
                             $mensaje='Ya existen estudiantes asignados en esta seccion para la unidad curricular : ' . ' ' . $name->nom_uc;
                             $error='true';
-                            $id = Auth::user() -> id; 
+                            $id = Auth::user() -> id;
                             $master = DB::table('mpuentemasters')->where('cod_seccion', '!=', 'NULL')->where('id_usu', $id)->get();
-                        
+
 
                             //envio error a pantalla
                         return redirect('/alumnos/vista')->with('msjerr',$mensaje);
@@ -253,9 +253,9 @@ class controlleralumnos extends Controller
                             DB::table('msec_ests')->insert($insert2);
                             $cod=$request->id_cod;
                             $cod_uc=DB::table('mpuentemasters')->where('id_uc_sec', $cod)->pluck('cod_unidad');
-                            
+
                             $name=ModelUnidadCurricular::find($cod_uc[0]);
-                            $id = Auth::user() -> id; 
+                            $id = Auth::user() -> id;
                             $master = DB::table('mpuentemasters')->where('cod_seccion', '!=', 'NULL')->where('id_usu', $id)->get();
                             $mensaje='Listado ALMACENADO     con exito para la unidad curricular : ' . ' ' . $name->nom_uc;
 
@@ -263,7 +263,7 @@ class controlleralumnos extends Controller
                         }
                 }
             }
- 
+
             return back()->with('error','Please Check your file, Something is wrong there.');
     }
 
@@ -273,7 +273,7 @@ class controlleralumnos extends Controller
     {
             //BORRO ANTIGUO Y INSTANCIO EL METODO ARCHIVO DE SUBIDA//
          DB::table('msec_ests')->where('id_master', $request->id_cod)->delete();
-        
+
             controlleralumnos::archivo($request);
 
             $cod=$request->id_cod;
@@ -282,7 +282,7 @@ class controlleralumnos extends Controller
             ///MUESTREO DE MENSAJE//
 
             $name=ModelUnidadCurricular::find($cod_uc[0]);
-            $id = Auth::user() -> id; 
+            $id = Auth::user() -> id;
             $master = DB::table('mpuentemasters')->where('cod_seccion', '!=', 'NULL')->where('id_usu', $id)->get();
             $mensaje='Listado ACTUALIZADO con exito para la unidad curricular : ' . ' ' . $name->nom_uc;
 
@@ -299,9 +299,9 @@ public function guardar_alumnos_manual(Request $request)
         $estu=$data->ci_new;
         $i=0;
         $seccion=$data->secccion;
-        $error='false'; 
+        $error='false';
         $idbit = Auth::user() -> ci_usu;
-           
+
             $nom=Auth::user() -> name;
             $ape=Auth::user() -> ape_usu;
             $name=$nom.' '.$ape.'';
@@ -312,7 +312,7 @@ public function guardar_alumnos_manual(Request $request)
 
             $alum=ModelEstudiante::where('ci_est',$key)->get();
             //dd($alum);
-            $cuetnavalid=count($alum); 
+            $cuetnavalid=count($alum);
             if($cuetnavalid>0){
 
                   $vaina=DB::table('msec_ests')->where('id_master',$seccion)->where('ci_est_tes', $key)->get();
@@ -323,17 +323,17 @@ public function guardar_alumnos_manual(Request $request)
 
                       DB::table('msec_ests')->insert([
                       ['ci_est_tes' => $key, 'id_master' => $seccion]]);
-                        
+
                           foreach ($alum as $estuarchivo){
                            //GUARDO EN BITACORA///
-                                       $accion='agregar.alummanual'; 
+                                       $accion='agregar.alummanual';
 
                                         $bitacora= new ModelBitacora;
-                                        $observacion='alumno registrado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est']; 
+                                        $observacion='alumno registrado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est'];
 
                                         $bitacora->registra($idbit,$accion,$observacion,$name);
 
-                                        //////////////////////////////// 
+                                        ////////////////////////////////
                                       }
                 }
                 else{
@@ -345,9 +345,9 @@ public function guardar_alumnos_manual(Request $request)
 
             }
             else{
-          
+
             $alum2= new ModelEstudiante;
-            $alum2->ci_est=$data->ci_new[$i];  
+            $alum2->ci_est=$data->ci_new[$i];
             $alum2->nom_est=$data->nom_new[$i];
             $alum2->ape_est=$data->ape_new[$i];
             $alum2->email=$data->email_new[$i];
@@ -356,14 +356,14 @@ public function guardar_alumnos_manual(Request $request)
 
             $alum2->save();
             //GUARDO EN BITACORA///
-                             $accion='subir.listado'; 
+                             $accion='subir.listado';
 
                               $bitacora= new ModelBitacora;
-                              $observacion='alumno registrado: '.$alum2->nom_est.''.$alum2->ape_est.''; 
+                              $observacion='alumno registrado: '.$alum2->nom_est.''.$alum2->ape_est.'';
 
                               $bitacora->registra($idbit,$accion,$observacion,$name);
 
-                              ////////////////////////////////    
+                              ////////////////////////////////
              $vaina=DB::table('msec_ests')->where('id_master',$seccion)->where('ci_est_tes', $key)->get();
               $cuenta=count($vaina);
             //dd($cuenta);
@@ -373,18 +373,18 @@ public function guardar_alumnos_manual(Request $request)
             ['ci_est_tes' => $key, 'id_master' => $seccion]]);
 
            // dd($alum2);
-            
+
             $i=$i+1;
         }
-        
+
 
         }
       }
          return redirect('/alumnos/vista');
 
-    
+
 }
-    
+
 
 
     public function modificar_alumnos_manual(Request $request)
@@ -397,7 +397,7 @@ public function guardar_alumnos_manual(Request $request)
         $i=0;
 
         $idbit = Auth::user() -> ci_usu;
-           
+
             $nom=Auth::user() -> name;
             $ape=Auth::user() -> ape_usu;
             $name=$nom.' '.$ape.'';
@@ -406,7 +406,7 @@ public function guardar_alumnos_manual(Request $request)
         foreach ($estu as $key){
             $alum=ModelEstudiante::where('ci_est',$key)->get();
             //dd($alum);
-            $cuetnavalid=count($alum); 
+            $cuetnavalid=count($alum);
             if($cuetnavalid>0){
             //$alum->ci_est=$data->ci_est;
             $alum->nom_est=$data->nom_est[$i];
@@ -417,15 +417,15 @@ public function guardar_alumnos_manual(Request $request)
                 ->where('ci_est', $key)
                 ->update(['nom_est' => $alum->nom_est, 'ape_est'=>$alum->ape_est, 'email'=>$alum->email]);
                 //GUARDO EN BITACORA///
-                             $accion='modificar.alummanual'; 
+                             $accion='modificar.alummanual';
 
                               $bitacora= new ModelBitacora;
-                              $observacion='alumno modificado: '.$alum->nom_est.''.$alum->ape_est; 
+                              $observacion='alumno modificado: '.$alum->nom_est.''.$alum->ape_est;
 
                               $bitacora->registra($idbit,$accion,$observacion,$name);
 
-                              //////////////////////////////// 
-            
+                              ////////////////////////////////
+
              $vaina=DB::table('msec_ests')->where('id_master',$seccion)->where('ci_est_tes', $key)->get();
               $cuenta=count($vaina);
 
@@ -438,24 +438,24 @@ public function guardar_alumnos_manual(Request $request)
 
                 foreach ($alum as $estuarchivo){
                  //GUARDO EN BITACORA///
-                             $accion='modificar.alummanual'; 
+                             $accion='modificar.alummanual';
 
                               $bitacora= new ModelBitacora;
-                              $observacion='alumno modificado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est']; 
+                              $observacion='alumno modificado: '.$estuarchivo['nom_est'].''.$estuarchivo['nom_est'];
 
                               $bitacora->registra($idbit,$accion,$observacion,$name);
 
-                              //////////////////////////////// 
+                              ////////////////////////////////
                               }
-            
+
            // dd('posi');
-            
+
              }
              $i=$i+1;
             }
              else{
                  $alum2= new ModelEstudiante;
-            $alum2->ci_est=$data->ci_est[$i];  
+            $alum2->ci_est=$data->ci_est[$i];
             $alum2->nom_est=$data->nom_est[$i];
             $alum2->ape_est=$data->ape_est[$i];
             $alum2->email=$data->email[$i];
@@ -474,10 +474,10 @@ public function guardar_alumnos_manual(Request $request)
                   $cuentaNotas=count($NotasAsignadas);
                     if($cuentaNotas>0){
                       $validNotaNew=ModelNota::where('id_eva_not',$value->id_eva)->where('ci_est_not',$alum2->ci_est)->first();
-                      
+
                       $cuentavalidNota=count($validNotaNew);
                       if($cuentavalidNota==0){
-        
+
                         $NuevaNota=new ModelNota;
                         $NuevaNota->id_eva_not=$value->id_eva;
                         $NuevaNota->ci_est_not=$alum2->ci_est;
@@ -492,53 +492,37 @@ public function guardar_alumnos_manual(Request $request)
                 }
               }
                 //dd($plandetectado,$evas);
-         
+
              //GUARDO EN BITACORA///
-                             $accion='modificar.alummanual'; 
+                             $accion='modificar.alummanual';
 
                               $bitacora= new ModelBitacora;
-                              $observacion='alumno modificado: '.$alum2->nom_est.''.$alum2->ape_est.''; 
+                              $observacion='alumno modificado: '.$alum2->nom_est.''.$alum2->ape_est.'';
 
                               $bitacora->registra($idbit,$accion,$observacion,$name);
 
-                              ////////////////////////////////    
+                              ////////////////////////////////
             DB::table('msec_ests')->insert([
             ['ci_est_tes' => $key, 'id_master' => $seccion]]);
-        
-                       
+
+
             $i=$i+1;
              }
         }
-        
+
          return redirect('/alumnos/vista');
     }
 
     public function eliminar(Request $request)
     {
         $id_sec_est = $request->id_sec_est;
-        
-        $sec_est =  DB::table('msec_ests')->where('id_sec_est' ,$id_sec_est)->delete();    
-        
+
+        $sec_est =  DB::table('msec_ests')->where('id_sec_est' ,$id_sec_est)->delete();
+
         //$sec_est->destroy();
-        
+
         $mensaje = 'El Alumno Fue Eliminado de la Seccion';
-        
+
         return response()->json($mensaje);
     }
-    public function index()
-    {}
-    public function create()
-    {}
-    public function store(Request $request)
-    {}
-    public function show($id)
-    {}
-    public function edit($id)
-    {}
-    public function update(Request $request, $id)
-    {}
-    public function destroy($id)
-    {}
-    public function agregar(Request $request)
-    {}
 }

@@ -25,7 +25,7 @@ class controllersecciones extends Controller
         //
     }
       public function mostrar()
-    {  
+    {
         $sec = ModelSeccion::where('cod_sec','<>','NULL')->get();
         $seccuenta=count($sec);
         //dd($seccuenta);
@@ -34,7 +34,7 @@ class controllersecciones extends Controller
         //Creo una variable la cual Me trae toda la informacion que contiene la base de datos
         $uni_crr = ModelUnidadCurricular::all();
         $cuentauc=count($uni_crr);
-        
+
           $master=DB::table('mpuentemasters')->where('cod_seccion','<>','NULL')->get();
 
         //Creo una variable la cual Me trae toda la informacion que contiene la base de datos
@@ -55,29 +55,24 @@ class controllersecciones extends Controller
             ]);
 
             $idbit = Auth::user() -> ci_usu;
-           
+
             $nom=Auth::user() -> name;
             $ape=Auth::user() -> ape_usu;
             $name=$nom.' '.$ape.'';
-            $accion='crear.seccion'; 
+            $accion='crear.seccion';
 
-  
+
         $sec = new ModelSeccion();
         $comprueba= $request-> UC;
 
         $sec -> cod_sec = $request -> cod_sec;
-        $secbusca= $request -> cod_sec;
-
         $sec -> turno = $request -> turno;
         $sec -> trayecto = $request -> trayecto;
         $id = $request -> trayecto;
         $seccasig[0]=$request->cod_sec;
 
-        $sevalida=ModelSeccion::find($secbusca);
-
-        $secvalid=(count($sevalida));
-        if($secvalid>0){  
-        Flash::warning('<h4><b>Ya existe secciones con este codigo: '.$secbusca.'!</b></h4>');
+        if(count(ModelSeccion::where('cod_sec',$request -> cod_sec)->get())>0){
+          Flash::warning('<h4><b>Ya existe secciones con este codigo: '.$request -> cod_sec.'!</b></h4>');
           //dd('yaexiste');
         }else{
 
@@ -85,12 +80,12 @@ class controllersecciones extends Controller
         $sec -> save();
         }
 
-          
-       
-         
+
+
+
           //GUARDO EN BITACORA///
           $bitacora= new ModelBitacora;
-          $observacion='Seccion Creada: '.$sec -> cod_sec.''; 
+          $observacion='Seccion Creada: '.$sec -> cod_sec.'';
 
           $bitacora->registra($idbit,$accion,$observacion,$name);
 
@@ -102,7 +97,7 @@ class controllersecciones extends Controller
            // dd('null');
              $uc = ModelUnidadCurricular::where('trayecto', $id)
              ->pluck('cod_uc_pnf');
-             
+
              if (!is_null($uc)) {
                 foreach ($uc as $key) {
                  $sec->MasterPuente_Secc_UniCrr()->attach( $key ,['cod_seccion'=>$seccasig[0],'id_usu'=>$user[0], 'coordinador'=>'FALSE']);
@@ -118,14 +113,14 @@ class controllersecciones extends Controller
                  $sec->MasterPuente_Secc_UniCrr()->attach( $key ,['cod_seccion'=>$seccasig[0],'id_usu'=>$user[0], 'coordinador'=>'FALSE']);
                 }
          }
-       
-        
+
+
 
     return redirect('Secciones/G_Secciones');
-        
+
     }
 
-    
+
 
     public function update(Request $request, $cod_sec)
     {
@@ -140,7 +135,7 @@ class controllersecciones extends Controller
             $nom=Auth::user() -> name;
             $ape=Auth::user() -> ape_usu;
             $name=$nom.' '.$ape.'';
-            $accion='modificar.seccion'; 
+            $accion='modificar.seccion';
             $secc = ModelSeccion::find($cod_sec);
             $iduser = Auth::user() -> id;
             $user=User::find($iduser);
@@ -153,7 +148,7 @@ class controllersecciones extends Controller
                     else
                   {
                           $materias=$request-> materia;
-                          
+
                           $secc -> turno = $request -> turno;
                           $secc -> trayecto = $request -> trayecto;
                           $seccasig[0]=$request->cod_sec;
@@ -161,55 +156,55 @@ class controllersecciones extends Controller
                           $secc -> save();
                           //GUARDO EN BITACORA///
                           $bitacora= new ModelBitacora;
-                          $observacion='Seccion Modificada: '.$secc -> cod_sec.''; 
+                          $observacion='Seccion Modificada: '.$secc -> cod_sec.'';
 
                           $bitacora->registra($idbit,$accion,$observacion,$name);
 
                           ////////////////////////////////
 
                                $secc -> cod_sec = $request -> cod_sec;
-                            
+
                                $id = $request -> trayecto;
 
                                $user=['2'];
-                               
-                              $unidadesasignadas=DB::table('mpuentemasters')->where('cod_seccion', $seccasig[0])->pluck('cod_unidad');
-                              
 
-                                        
+                              $unidadesasignadas=DB::table('mpuentemasters')->where('cod_seccion', $seccasig[0])->pluck('cod_unidad');
+
+
+
                                     if (!is_null($materias)) {
                                     foreach ($materias as $key){
                                             //dd($key,$seccasig[0],$user[0]);
-                                         /* 
+                                         /*
                                           $var=DB::table('mpuentemasters')->where('cod_seccion', $seccasig)->where('id_usu', $user[0])->where('coordinador', 'FALSE')->get();
                                           //dd($var,'usuario',$user[0],$user,'seccion',$seccasig);
-                                            
+
                                           DB::table('mpuentemasters')->where('cod_seccion', $seccasig)->where('id_usu', $user[0])->where('coordinador', 'FALSE')->update(['cod_unidad' =>DB::raw($key)]);*/
 
-                                        if($secc->notieneUC2($key, $seccasig[0])){  
+                                        if($secc->notieneUC2($key, $seccasig[0])){
                                           $secc->MasterPuente_Secc_UniCrr()->attach( $key ,['cod_seccion'=>$seccasig[0],'id_usu'=>$user[0], 'coordinador'=>'FALSE']);
                                           }
 
                                           if ($secc->tieneUC2($key, $seccasig[0])) {
 
-                                          } 
+                                          }
                                           }
 
                                             foreach ($unidadesasignadas as $asig) {
                                                if (in_array($asig, $materias)) {
-                                                           
+
                                                 //dd($asig,$unidadesasignadas,$materias);
-                                                } 
+                                                }
                                                 else{
                                                     $secc->MasterPuente_Secc_UniCrr()->detach( $asig ,['cod_seccion'=>$seccasig[0],'id_usu'=>$user[0], 'coordinador'=>'FALSE']);
                                                 }
-                                                      
-                                             }  
+
+                                             }
                                       }
                                       else{
                                         $uc = ModelUnidadCurricular::where('trayecto', $id)
                                          ->pluck('cod_uc_pnf');
-                                         
+
                                          if (!is_null($uc)) {
                                             foreach ($uc as $key) {
                                              $secc->MasterPuente_Secc_UniCrr()->attach( $key ,['cod_seccion'=>$seccasig[0],'id_usu'=>$user[0], 'coordinador'=>'FALSE']);
@@ -220,19 +215,19 @@ class controllersecciones extends Controller
                   }
               }
 }
-     
+
     public function eliminar($cod_sec){
         $idbit = Auth::user() -> ci_usu;
         $nom=Auth::user() -> name;
         $ape=Auth::user() -> ape_usu;
         $name=$nom.' '.$ape.'';
-        $accion='eliminar.seccion'; 
+        $accion='eliminar.seccion';
 
         $sec = ModelSeccion::find($cod_sec);
         $sec->delete();
         //GUARDO EN BITACORA///
           $bitacora= new ModelBitacora;
-          $observacion='Seccion Eliminada: '.$sec -> cod_sec.''; 
+          $observacion='Seccion Eliminada: '.$sec -> cod_sec.'';
 
           $bitacora->registra($idbit,$accion,$observacion,$name);
 
@@ -252,7 +247,7 @@ class controllersecciones extends Controller
     public function edit($id)
     {}
 
-  
+
 
     public function destroy($id)
     {}

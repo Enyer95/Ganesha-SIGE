@@ -20,19 +20,19 @@ use \Auth as Auth;
 use Carbon\Carbon;
 
 
- 
+
 class ControllerUnidadCurriculars extends Controller
 {
      public function validarNull($tray)
     {
             if($tray=='1'){
-                $tray ='NULL1'; 
+                $tray ='NULL1';
             }
              if($tray=='2'){
-                $tray ='NULL2';     
+                $tray ='NULL2';
             }
             if($tray=='3'){
-                $tray ='NULL3';  
+                $tray ='NULL3';
             }
              if($tray=='4'){
                 $tray  ='NULL4';
@@ -45,10 +45,10 @@ class ControllerUnidadCurriculars extends Controller
 
 
     public function mostrar()
-    {  
+    {
         $uni_crr = ModelUnidadCurricular::all();
         //Creo una variable la cual Me trae toda la informacion que contiene la base de datos
-        
+
         $ejes = ModelEje::all();
         //Creo una variable la cual Me trae toda la informacion que contiene la base de datos
         return view('Uni_Crr/G_uc')->with(['uni_crr' => $uni_crr, 'ejes' => $ejes]);
@@ -72,11 +72,11 @@ class ControllerUnidadCurriculars extends Controller
             ]);
 
             $idbit = Auth::user() -> ci_usu;
-           
+
             $nom=Auth::user() -> name;
             $ape=Auth::user() -> ape_usu;
             $name=$nom.' '.$ape.'';
-            $accion='crear.uc'; 
+            $accion='crear.uc';
         $uc = new ModelUnidadCurricular();
 
         //$sec = new ModelSeccion;
@@ -95,25 +95,21 @@ class ControllerUnidadCurriculars extends Controller
         $uc -> periodo = true;
         $uc -> cod_pen_uc = 1;
         $ucbusca=$request -> C_uc;
-        $ucvalida=ModelUnidadCurricular::find($ucbusca);
+        if(count(ModelUnidadCurricular::where('cod_uc_pnf',$request -> C_uc)->get())>0){
 
-        $ucvalid=(count($ucvalida));
-//dd($ucvalida,$ucvalid);
+          Flash::warning('<h4><b>Ya existe esta UC con este codigo: '.$ucbusca.'!</b></h4>');
 
-        if($ucvalid>0){  
-        Flash::warning('<h4><b>Ya existe esta UC con este codigo: '.$ucbusca.'!</b></h4>');
-         
         }else{
 
 
         $uc -> save();
         }
-   
-        
+
+
 
         //GUARDO EN BITACORA///
           $bitacora= new ModelBitacora;
-          $observacion='Unidad Curricular Creada: '.$uc -> nom_uc.''; 
+          $observacion='Unidad Curricular Creada: '.$uc -> nom_uc.'';
 
           $bitacora->registra($idbit,$accion,$observacion,$name);
 
@@ -126,17 +122,17 @@ class ControllerUnidadCurriculars extends Controller
                 $uc->ejes()->attach($eje);
              }
          }
-        // $tray = $uc -> trayecto; 
+        // $tray = $uc -> trayecto;
 
         // $sec = ControllerUnidadCurriculars::validarNull($tray);
 
         // $uc->seccions()->attach($sec);
 
     return redirect('Uni_Crr/G_uc');
-        
+
     }
 
-   
+
 public function update(Request $request, $cod_uc_pnf)
     {
 
@@ -149,7 +145,7 @@ public function update(Request $request, $cod_uc_pnf)
             'HTE' => 'required',
             'N_uc' => 'required',
             'HTA' => 'required',
-            'cod_ejes' => 'required',            
+            'cod_ejes' => 'required',
             ]);
          $iduser = Auth::user() -> id;
         $user=User::find($iduser);
@@ -160,14 +156,14 @@ public function update(Request $request, $cod_uc_pnf)
               return back();}
             else{
             $idbit = Auth::user() -> ci_usu;
-            
+
             $nom=Auth::user() -> name;
             $ape=Auth::user() -> ape_usu;
             $name=$nom.' '.$ape.'';
-            $accion='modificar.uc'; 
+            $accion='modificar.uc';
 
         $uc = ModelUnidadCurricular::find($cod_uc_pnf);
-        
+
 
         $unidad = $uc-> cod_uc_pnf;
         $tray = $uc -> trayecto;
@@ -182,21 +178,21 @@ public function update(Request $request, $cod_uc_pnf)
         $uc -> htt = $request -> HTT;
         $uc -> hte = $request -> HTE;
         $uc -> periodo = true;
-        $uc -> cod_pen_uc = 1;   
-       
+        $uc -> cod_pen_uc = 1;
+
         $uc -> cod_uc_pnf = $request -> C_uc;
-        
+
         $eje = $request -> cod_ejes;
 
         if(count($eje) > 0){
                 $uc->ejes()->sync($eje);
-        }    
-       
+        }
+
        // $secc = ControllerUnidadCurriculars::validarNull($sec);
-    
-     
+
+
        // $uc->seccions()->detach($seccion);
-        //$uc->seccions()->attach($secc);  
+        //$uc->seccions()->attach($secc);
         $user=['2'];
         // dd($uc->cod_uc_pnf);
 
@@ -209,7 +205,7 @@ public function update(Request $request, $cod_uc_pnf)
         Flash::warning('<h4><b>Se ha actualizado la Unid. Curricular  EXCEPTUANDO las modificaciones del trayecto, ya que esta ya se encuentra ASIGNADA a un grupo de Secciones.</b></h4>');
             //GUARDO EN BITACORA///
           $bitacora= new ModelBitacora;
-          $observacion='Unidad Curricular Modificada de:'.$request -> N_uc.' a: '.$uc -> nom_uc.''; 
+          $observacion='Unidad Curricular Modificada de:'.$request -> N_uc.' a: '.$uc -> nom_uc.'';
 
           $bitacora->registra($idbit,$accion,$observacion,$name);
 
@@ -223,32 +219,32 @@ public function update(Request $request, $cod_uc_pnf)
         $uc -> save();
         //GUARDO EN BITACORA///
           $bitacora= new ModelBitacora;
-          $observacion='Unidad Curricular Modificada: de:'.$request -> N_uc.' a: '.$uc -> nom_uc.''; 
+          $observacion='Unidad Curricular Modificada: de:'.$request -> N_uc.' a: '.$uc -> nom_uc.'';
 
           $bitacora->registra($idbit,$accion,$observacion,$name);
 
           ////////////////////////////////
         return redirect('Uni_Crr/G_uc');
         }
-        
 
-    }       
+
+    }
 
     }
 }
 
     public function eliminar($cod_uc_pnf){
             $idbit = Auth::user() -> ci_usu;
-          
+
             $nom=Auth::user() -> name;
             $ape=Auth::user() -> ape_usu;
             $name=$nom.' '.$ape.'';
-            $accion='eliminar.uc'; 
+            $accion='eliminar.uc';
         $Deje = ModelUnidadCurricular::find($cod_uc_pnf);
         $Deje->delete();
         //GUARDO EN BITACORA///
           $bitacora= new ModelBitacora;
-          $observacion='Unidad Curricular eliminada: '.$Deje -> nom_uc.''; 
+          $observacion='Unidad Curricular eliminada: '.$Deje -> nom_uc.'';
 
           $bitacora->registra($idbit,$accion,$observacion,$name);
 
@@ -259,18 +255,18 @@ public function update(Request $request, $cod_uc_pnf)
     public function destroy($cod_uc_pnf)
     {
             $idbit = Auth::user() -> ci_usu;
-           
+
             $nom=Auth::user() -> name;
             $ape=Auth::user() -> ape_usu;
             $name=$nom.' '.$ape.'';
-            $accion='eliminar.uc'; 
+            $accion='eliminar.uc';
 
         $uc = ModelUnidadCurricular::find($cod_uc_pnf);
         $uc->delete();
 
          //GUARDO EN BITACORA///
           $bitacora= new ModelBitacora;
-          $observacion='Unidad Curricular eliminada: '.$uc -> nom_uc.''; 
+          $observacion='Unidad Curricular eliminada: '.$uc -> nom_uc.'';
 
           $bitacora->registra($idbit,$accion,$observacion,$name);
 
