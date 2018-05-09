@@ -7,6 +7,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="card">
                         <div class="card-header" data-background-color="blue">
+                          <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Ingrese los datos del docente a registrar"></i>
                             <h4 class="title">Registro de Usuario</h4>
                             <p class="category">Ingrese los Datos del Nuevo Usuario</p>
                         </div>
@@ -81,7 +82,7 @@
                                                         <strong>{{ $errors->first('ape_usu') }}</strong>
                                                     </span>
                                                 @endif
-                                            </div>        
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +90,8 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label for="roles">Roles Del Usuario</label>
-                                            <div class="col-md-offset-1"> 
+                                            <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Seleccione el rol que tendra el usuario<br>Recuerde es este reguira las acciones del mismo"></i>
+                                            <div class="col-md-offset-1">
                                                 @if(isset($roles) )
                                                     @foreach($roles as $rol)
                                                         <input type="checkbox" id="{{$rol->id_rol}}" name="id_rol[]" value="{{$rol->id_rol}}" onclick="showContent(this)"><!--mando id -->
@@ -103,13 +105,14 @@
                                         {{-- div oculto --}}
                                     <div class="col-md-5" id="divUC" style="display: none;">
                                         <div class="form-group">
-                                            <label>Unidades Curriculares</label>     
+                                          <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Seleccione las unidades curriculares que coordinara el docente"></i>
+                                            <label>Unidades Curriculares</label>
                                             <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;" name="materia[]">
                                                 @if(isset($uc) )
                                                     @foreach($uc as $uc)
                                                         <option value='{{ $uc->cod_uc_pnf }}' >
 
-                                                            {{ $uc->nom_uc }} 
+                                                            {{ $uc->nom_uc }}
                                                         </option>
                                                     @endforeach
                                                 @endif
@@ -118,7 +121,7 @@
                                     </div>
                                 </div>
                                 <div class="row col-md-offset-1">
-                                    <div class="col-md-5">                                        
+                                    <div class="col-md-5">
                                         <div class="form-group{{ $errors->has('tlf') ? ' has-error' : '' }}">
                                             <label for="tlf" class="control-label">Telefono Celular</label>
                                             <div>
@@ -126,7 +129,7 @@
                                                 @if ($errors->has('tlf'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('tlf') }}</strong>
-                                                    </span>                                                
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -172,12 +175,12 @@
 </script>
 
 <script type="text/javascript">
-    function showContent(check) 
-        {        
+    function showContent(check)
+        {
    // alert('El check '+check.id+' tiene el valor '+check.value);
         checka = check.id;
         if (checka == '5') {
-            element = document.getElementById("divUC");    
+            element = document.getElementById("divUC");
             if (check.checked) {
                 $('.select2').attr("required", true);
                 element.style.display='block';

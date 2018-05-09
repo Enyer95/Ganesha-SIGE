@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-  
+
 <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
@@ -9,10 +9,11 @@
                     <div class="card">
                         <div class="card-header" data-background-color="blue">
                             <!--Condiciono que si la variable trae algun valor muestre el formulario de editar -->
+                            <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Asigne los docentes en las secciones pertinentes"></i>
                             <h4 class="title">Asignación de Unidades</h4>
                             <p class="category">Lista de Unidades Curriculares</p>
                         </div><!--fin card header-->
-                        
+
 
                                 <section class="content-header">
                                   <ol class="breadcrumb">
@@ -32,14 +33,14 @@
                              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                              </div>
                             @endif
-        
+
                             @if(session()->has('msjerr') )
                              <div class="alert alert-danger alert-dismissible">{{ session('msjerr') }}
                              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>
                             @endif
                         @if(isset($editar))
-                          
-                         
+
+
 
                             @if($editar == 'true')
                                 @include('Usuario.Modificar_usu_asignados')
@@ -50,14 +51,14 @@
                                 @include('Usuario.Asignardocentes')
                                 @include('Usuario.listadeasig')
                             @endif
-                            
+
                             @if($editar == 'none')
-                                 
+
                                 <br>
                                  @include('Usuario.listadeasig')
-                            @endif                       
+                            @endif
                             @else
-                        
+
                                 @include('Usuario.listadeasig')
                         @endif
 
@@ -85,7 +86,7 @@
         $('#myModal2').modal('show');
     });
     /*$(document).ready(function(){
-     
+
         $(".Modal_usu_asignados").fadeIn();
 
 

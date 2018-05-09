@@ -37,7 +37,7 @@
                                 <div class="card-content table-responsive">
                             <!--Condiciono que si la variable trae algun valor muestre el formulario de editar -->
                                     @include('flash::message')
-                                    
+
                                     @include('Usuario.Modificar_usu')
                             @else
                                 <section class="content-header">
@@ -55,7 +55,7 @@
                                 <div class="card-content table-responsive">
                                     <table align="right">
                                         <tr>
-                                            <td colspan="8"></td>                                    
+                                            <td colspan="8"></td>
                                             <td>
                                                 <a href="{{ url('/auth/registrar') }}">
                                                     <button type="submit" class="btn btn-primary btn-xs" >
@@ -66,7 +66,7 @@
                                         </tr>
                                     </table>
                         @include('flash::message')
-                                    
+
         					       @include('Usuario.listar_usu')
                             @endif
                         </div>
@@ -86,7 +86,7 @@
 
     $(document).ready(function(){
         var oTable=$('#Usuarios').DataTable({
-            "responsive": true,  
+            "responsive": true,
             "order": [],
             //"paging": false,
             "language": {
@@ -98,12 +98,12 @@
                        "loadingRecords": "Por favor Espere Estamos Buscando Registros",
                        "processing": "Procesando sus datos",
                         "lengthMenu": "Cantidad de Registros _MENU_"
-                     },      
+                     },
 
         });
         //oTable.fnDestroy();
     });
-    
+
     function verifico(check){
         {{-- value="{{ $n->ci_usu }}" onclick="verifico(this)" --}}
         elimi = check.value;

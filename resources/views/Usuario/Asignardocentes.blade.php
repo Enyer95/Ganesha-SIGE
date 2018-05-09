@@ -5,12 +5,13 @@
 <div  class="modal fade" data-backdrop="static" data-keyboard=”false”  id="myModal2">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header"> 
+            <div class="modal-header">
                 <div class="box-header with-border">
+                  <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Asigne los docentes a las secciones indicadas"></i>
                     <h3 class="box-title">Asignar {{$uc->nom_uc}}</h3>
                 </div>
 
-                <div class="box-body">  
+                <div class="box-body">
                                 <div class="table-responsive">
                                 <form role="form" method="POST" action="{{ url('/controllerusers/actualizarasignaruc') }}">
                                     {{ csrf_field() }}
@@ -21,13 +22,13 @@
                                         </thead>
                                         <tbody>
             <input class="hide" type="text" name="cod_uc" value="{{$uc->cod_uc_pnf}}">
-                                       
+
 
                                         @foreach($listaSec as $lisSec)
-                                            <tr> 
+                                            <tr>
 
                                             @foreach($listaSecvalid as $valid)
-                                               
+
                                                 @if($valid==$lisSec->cod_sec)
                                                     <td>
                                                     {{ $lisSec->cod_sec}}
@@ -44,25 +45,25 @@
                                                                     {{$lisUse->name}}
                                                                 </option>
                                                         @endif
-                                                        @endforeach 
+                                                        @endforeach
 
-                                                        @endforeach 
+                                                        @endforeach
                                                     </select>
                                                 </td>
 
 
 
-                                                
+
                                                 @else
                                                 @endif
                                             @endforeach
                                             </tr>
                                          @if($lisSec->trayecto == $uc->trayecto)
-                                        
-                                                
 
 
-                                                
+
+
+
                                         </tbody>
                                         @endif
                                         @endforeach
@@ -70,10 +71,10 @@
                                         <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>  
+                    </div>
                                 </form>
                             </div>
-                        </div>    
+                        </div>
 
                     </div>
                 </div>
@@ -82,4 +83,3 @@
         @endif
     @endforeach
 @endif
-      

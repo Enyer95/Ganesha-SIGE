@@ -13,62 +13,17 @@
 
 
     <!--Styles-->
-    <link href="{{ url('path') }}/css/estilos.css" rel="stylesheet">
+    <link href="{{ url('/css/estilos.css') }}" rel="stylesheet">
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ url('/css/bootstrap.css') }}">
-  <link rel="stylesheet" href="{{ url('/css/AdminLTE.css') }}">
-  <link rel="stylesheet" href="{{ url('/css/_all-skins.css') }}">
-  <link rel="stylesheet" href="{{ url('/css/select2.css') }}">
+  <link rel="stylesheet" href="{{ url('/css/font-awesome/css/font-awesome.min.css') }}">
 
   @yield('customcss')
 </head>
-<body >  
+<body >
 
-    <div class="wrapper">
-      <header class='main-header'>
-        <nav class="navbar-header navbar-static-top">
+    <div >
 
-            <a class="navbar-brand">
-              <img class='logo2 img-responsive' alt="Responsive image" src='{{ url('/img/ganesha.png') }}' style="max-width: 50px; max-height: 50px;">
-            </a>
-            <a href="/" class="navbar-brand">
-              <font color="white">
-                <h4>
-                  Sistema de Informacion Para la Gestion de Evaluaciones GANESHA |SIGE|
-                </h4>
-              </font>
-            </a>  
-        
-            <a class="navbar-brand">
-            <img class='logotype img-responsive' src='{{ url('/img/logo.png') }}' alt="Responsive image" style="max-width: 50px; max-height: 50px;">
-            </a>
-            <a class="navbar-brand">
-              <font color="white">
-                <h4>
-                  UPTAEB
-                </h4>
-              </font>
-            </a>  
-                      <div class="col-md-2"></div>
-
-            <div class="navbar-custom-menu">
-              <ul class="nav navbar-nav">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-                    <font color="white">Ayuda<span class="caret"></span></font> 
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ url('#') }}">E-mail</a></li>
-                    <li><a target="_blank" href="{{ url('docs/Manual de Usuario.pdf') }}">Manual de usuario</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="{{ url('#') }}">About</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-        </nav>
-      </header>
-     
 
 
 <div class="content-wrapper ">
@@ -77,13 +32,15 @@
       <Br>
       <Br>
       <Br>
-      
+
 
 <div class="container ">
     <div class="row ">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8" style="margin-top: 15%; margin-left: 15%;">
             <div class="panel panel-default">
-                <div class="panel-heading">Resetear Password</div>
+                <div class="panel-heading">Recuperar Password
+                  <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Ingrese su correo para recuperar su contraseña"></i>
+                  </div>
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -123,17 +80,18 @@
 </div>
 
     </div>
-    
+
   </div>
    <!-- Jquery a de estar siempre de primero -->
   <script src="{{ url('/js/jquery.js') }}"></script>
   <script src="{{ url('/js/bootstrap.js') }}"></script>
-  <script src="{{ url('/js/functions.js') }}"></script>
-  <!-- Select2 -->
-  <script src="{{ url('/js/select2.full.js') }}"></script>
   <script src="{{ url('/js/Admin.min.js') }}"></script>
-                
 
-@yield('customjs')
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+
 </body>
 </html>

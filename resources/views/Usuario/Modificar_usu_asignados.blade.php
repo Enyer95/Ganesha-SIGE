@@ -4,15 +4,16 @@
 <div  class="modal fade" data-backdrop="static" data-keyboard=”false” id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header"> 
+            <div class="modal-header">
                 <div class="box-header with-border">
+                  <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Modifique las Asignaciones necesarias"></i>
                     <h3 class="box-title">Modificar {{$uc->nom_uc}}</h3>
                 </div>
                  <div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><b>Ya existen Usuarios asignados para esta Unidad Curricular, Si lo desea puede modificar los registros y guardar los cambios. De lo contrario presione el botón 'Cancelar'<b>.<br>
 
                 <h4>Ganesha -SIGE.</h4> </div>
-                                     
-                <div class="box-body">  
+
+                <div class="box-body">
                                 <div class="table-responsive">
                                 <form role="form" method="POST" action="{{ url('/controllerusers/actualizarasignaruc') }}">
                                     {{ csrf_field() }}
@@ -21,16 +22,16 @@
                                             <th>Codigo De Seccion</th>
                                             <th>Docentes</th>
                                         </thead>
-                                        
+
             <input class="hide" type="text" name="cod_uc" value="{{$uc->cod_uc_pnf}}">
-                                       
+
                                     @foreach($listaSec as $lisSec)
-                                            <tr>      
+                                            <tr>
                                         @foreach($listaSecvalid as $valid)
                                             @if($valid==$lisSec->cod_sec)
-                        
+
                                                 <tbody>
-                                                <td> 
+                                                <td>
                                                     {{ $lisSec->cod_sec}}
                                                     <input class="hide" type="text" name="cod_secc[]" value="{{ $lisSec->cod_sec}}">
 
@@ -48,24 +49,24 @@
                                                                             {{$lisUse->name}}
                                                                         </option>
                                                                 @endif
-                                                            @endforeach 
+                                                            @endforeach
 
-                                                        @endforeach 
+                                                        @endforeach
                                                     </select>
                                                 </td>
                                                 </tbody>
                                             @endif
                                         @endforeach
-                                    @endforeach 
+                                    @endforeach
 
                                     </table>
                                         <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>  
+                    </div>
                                 </form>
                             </div>
-                        </div>    
+                        </div>
 
                     </div>
                 </div>
@@ -74,4 +75,3 @@
         @endif
     @endforeach
 @endif
-      

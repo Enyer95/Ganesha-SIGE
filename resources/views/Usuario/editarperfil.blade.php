@@ -11,6 +11,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="card">
                         <div class="card-header" data-background-color="blue">
+                          <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Aqui puede cambiar sus datos personales<br>Solo en esta parte puede cambiar su contraseña"></i>
                             <h4 class="title">Gestion de Usuarios</h4>
                             <p class="category">Lista de Usuarios</p>
                         </div>
@@ -33,7 +34,7 @@
                                             <form role="form" method="POST" action="{{ url('/edicion/perfils') }}" enctype="multipart/form-data">
                                               <!-- Al Form le cambie la accion colocandole la funcion ::route:: la cual indica el controlador a donde a de ir mas la funcion en el mismo, ademas de la variable que resivi del home indicado la id del registro a modificar.
                                               Esta ruta la puedes verificar con el comando :: php artisan route:list ::-->
-                                       
+
 
                                               <!-- Cambio el metodo con el cual envio los datos ya que segun la ruta, estos se envian mediante PUT y si no se modifica laravel no lo reconoce-->
 
@@ -43,7 +44,7 @@
                                               A este le asignamos el valor que viene en la variable resivida de home -->
 
                                                 {{ csrf_field() }}
-                                                
+
                                                 <div class="box-body">
                                                   <div class="form-group">
                                                     <label for="cedula">Cedula</label>
@@ -63,8 +64,8 @@
                                                     <!--Le damos el valor que resivimos segun sea el que se desea modificar, y dela misma manera mostramos los datos-->
                                                   </div>
 
-                                                    
-                                                  
+
+
                                                       <div class="form-group">
                                                         <label for="email">Correo</label>
                                                           <input type="email" class="form-control" name="email"  onBlur="revisarEmail(this); "  maxlength="36" minlength="10" placeholder="Ej.  ejemplo@ejemplo.com" required  value="{{ $mod_usuario->email}}">
@@ -85,7 +86,7 @@
                                                                         <strong>{{ $errors->first('password') }}</strong>
                                                                     </span>
                                                                 @endif
-                                                            </div>    
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1"></div>
@@ -94,21 +95,21 @@
                                                             <label for="password-confirm" class="control-label">Confirmar Contraseña</label>
                                                             <div>
                                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                            </div>    
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                           
-                                                    
+
+
                                                     <div class="form-group">
                                                       <div  class="col-md-4">
                                                         <label>Foto de Perfil</label>
                                                       </div>
-                                                    
+
                                                       <div  class="col-md-2">
-                                                        <img src='{{ url('/img_perfil/'.$mod_usuario->img_perfil) }}' class="img-responsive" alt="Responsive image" style="max-width: 100px; max-height: 100px;"> 
-                                                       </div>               
-                                                    
+                                                        <img src='{{ url('/img_perfil/'.$mod_usuario->img_perfil) }}' class="img-responsive" alt="Responsive image" style="max-width: 100px; max-height: 100px;">
+                                                       </div>
+
                                                     <div class="col-md-3">
                                                       <input type="file" name="img_perfil" required value="{{ $mod_usuario->img_perfil}}" >
                                                         <input class="hide" type='text' name="img_perfil" value="{{ $mod_usuario->img_perfil}}">
@@ -137,15 +138,15 @@
 <script>
     //Initialize Select2 Elements
     $(".select2").select2();
-  
-    function showContent(check) 
-        {        
+
+    function showContent(check)
+        {
    // alert('El check '+check.id+' tiene el valor '+check.value);
 
         checka = check.id;
 
         if (checka == '5') {
-            element = document.getElementById("divUC");    
+            element = document.getElementById("divUC");
             if (check.checked) {
                 element.style.display='block';
             }
@@ -159,7 +160,7 @@
 
     $(document).ready(function(){
         var oTable=$('#Usuarios').DataTable({
-            "responsive": true,  
+            "responsive": true,
             "order": [],
             //"paging": false,
             "language": {
@@ -171,7 +172,7 @@
                        "loadingRecords": "Por favor Espere Estamos Buscando Registros",
                        "processing": "Procesando sus datos",
                         "lengthMenu": "Cantidad de Registros _MENU_"
-                     },      
+                     },
 
         });
         oTable.fnDestroy();

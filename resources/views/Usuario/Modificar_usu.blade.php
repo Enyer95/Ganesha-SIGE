@@ -1,5 +1,6 @@
 @if(isset($mod_usuario))
           <!--Si entro aqui es porque en ciclo de editar se a cumplido bien y me he traido la variable que manda el controlador desde la vista home-->
+          <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Editar los datos del usuario<br>Recuerde que el rol regira las acciones del mismo"></i>
 
           <form role="form" method="POST" action="{{ route('controllerusers.update', $mod_usuario->id) }}" enctype="multipart/form-data">
             <!-- Al Form le cambie la accion colocandole la funcion ::route:: la cual indica el controlador a donde a de ir mas la funcion en el mismo, ademas de la variable que resivi del home indicado la id del registro a modificar.
@@ -37,8 +38,8 @@
                   <!--Le damos el valor que resivimos segun sea el que se desea modificar, y dela misma manera mostramos los datos-->
                 </div>
 
-                <div class="row col-md-offset-1">
-                  <div class="col-md-5">  
+                <div class="row col-md">
+                  <div class="col-md-6">
                     <label for="roles">Roles Del Usuario</label>
                     @if(isset($roles) ) <!-- Verifico que existen modulos-->
                       @foreach($roles as $rol)<!-- inicio foreach con alias-->
@@ -51,20 +52,20 @@
                         </a>
                       @endforeach
                     @endif
-                  </div> 
-                  
-                  <div class="col-md-5" id="divUC" style="display: none;">
-                    <label>Unidades Curriculares</label>     
+                  </div>
+
+                  <div class="col-md-6" id="divUC" style="display: none;">
+                    <label>Unidades Curriculares</label>
                     <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione Unidades" style="width: 100%;   background-color: #fff;" name="materia[]">
                       @if(isset($uc))
                         @foreach($uc as $unidad)
                           <option @if($mod_usuario->tieneUCCor($unidad->cod_uc_pnf,$mod_usuario->id)) selected @endif value="{{$unidad->cod_uc_pnf}}">
-                            {{ $unidad->nom_uc }} 
+                            {{ $unidad->nom_uc }}
                           </option>
                         @endforeach
                       @endif
                     </select>
-                  </div> 
+                  </div>
 
                 </div>
                     <div class="form-group">
@@ -76,22 +77,22 @@
                     <label for="tlf">Telefono</label>
                       <input type="text" class="form-control" name="tlf"  onkeypress="return soloNumeros(event)" maxlength="11" minlength="11" placeholder="Ej. 04262341232"  required  value="{{ $mod_usuario->tlf}}">
                         <!--Le damos el valor que resivimos segun sea el que se desea modificar, y dela misma manera mostramos los datos-->
-                  </div>              
+                  </div>
                   <div class="form-group">
                     <div  class="col-md-4">
                       <label>Foto de Perfil</label>
                     </div>
-                  
+
                     <div  class="col-md-2">
-                      <img src='{{ url('/img_perfil/'.$mod_usuario->img_perfil) }}' class="img-responsive" alt="Responsive image" style="max-width: 100px; max-height: 100px;"> 
-                     </div>               
+                      <img src='{{ url('/img_perfil/'.$mod_usuario->img_perfil) }}' class="img-responsive" alt="Responsive image" style="max-width: 100px; max-height: 100px;">
+                     </div>
 
                   <div class="col-md-3">
                     <input type="file" name="img_perfil" >
                       <input class="hide" type='text' name="img_perfil" value="{{ $mod_usuario->img_perfil}}">
                   </div>
                 </div>
-                
+
                 </div>
                   <!-- /.box-body -->
                   <div class="box-footer">
@@ -105,18 +106,18 @@
 <script>
     //Initialize Select2 Elements
     $(".select2").select2();
-  
+
 </script>
 
 <script>
-    function showContent(check) 
-        {        
+    function showContent(check)
+        {
    // alert('El check '+check.id+' tiene el valor '+check.value);
 
         checka = check.id;
 
         if (checka == '5') {
-            element = document.getElementById("divUC");    
+            element = document.getElementById("divUC");
             if (check.checked) {
                 element.style.display='block';
             }
@@ -129,7 +130,7 @@
     check = $('#5');
     rolesUsu = {{ $rolesUsu }};
     if (rolesUsu != '') {
-      element = document.getElementById("divUC"); 
+      element = document.getElementById("divUC");
                 element.style.display='block';
 
     }
