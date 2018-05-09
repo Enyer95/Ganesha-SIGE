@@ -40,16 +40,18 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header" data-background-color="blue">
+                  <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Login para Profesores <br> Ingrese su cedula y contraseña en los campos indicados"></i>
+
                     <h4 class="title">Bienvenido</h4>
                     <p class="category">Ingrese sus Datos</p>
-                </div>                
+                </div>
                 <div class="card-content">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
 
                         <div class="{{ $errors->has('ci_usu') ? ' has-error' : '' }}">
-                            <label for="ci_usu" class="control-label">Cedula de Identidad</label>
+                            <label for="ci_usu" class="control-label">Cedula de Identidad </label>
                                 <input id="ci_usu" type="text" class="form-control" name="ci_usu" value="{{ old('ci_usu') }}" maxlength="8" minlength="7" onKeyPress="return soloNumeros(event)" placeholder="xxxxxxxxx" required autofocus>
                                 @if ($errors->has('ci_usu'))
                                     <span class="help-block">
@@ -79,27 +81,12 @@
                                 ¿Olvido su Contraseña?
                             </a>
 
-                    </form> 
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
- 
-                <div class="card-header" data-background-color="blue">
-                    <h4 class="title">Ingreso para Estudiante</h4>
-                    <p class="category">Consulta tu Nota</p>
-                </div>          
-            <!-- /.box-header -->
-                <div class="card-content">
-                            @include('flash::message')
-                    
-                    @include('Alumnos.Datos_Consulta')
-                </div>
-            <!-- /.box-body -->
-            </div>
-          <!-- /.box -->
-        </div>
+        @include('Alumnos.Datos_Consulta')
+
     </div>
 </div>
 @endsection

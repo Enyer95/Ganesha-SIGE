@@ -1,4 +1,14 @@
+<div class="col-md-4">
+    <div class="card">
+      <div class="card-header" data-background-color="blue">
+        <i class="fa fa-question quest" data-toggle="tooltip"    data-html="true" data-placement="bottom"  title="Login para consultar notas <br> Ingrese su cedula en los campos"></i>
 
+            <h4 class="title">Ingreso para Estudiante</h4>
+            <p class="category">Consulta tu Nota</p>
+        </div>
+    <!-- /.box-header -->
+        <div class="card-content">
+                    @include('flash::message')
 
 <form class="form-horizontal" role="form" method="POST" action="{{ url('/Consulta/Alumnos_Nota') }}">
 {{ csrf_field() }}
@@ -27,3 +37,10 @@
         Entrar
     </button>
 </form>
+
+
+                </div>
+            <!-- /.box-body -->
+            </div>
+          <!-- /.box -->
+        </div>

@@ -3,23 +3,12 @@
 @section('content')
 
 <section class="content">
-    <div class="row">        
+    <div class="row">
       	<div class="col-md-4 col-md-offset-1">
       		<div class="col-lg-12 col-xs-6">
-		  		<!-- small box --> 
+		  		<!-- small box -->
 
-       
-				<div class="small-box bg-yellow">
-				    <div class="inner">
-				      <h3>Notificación</h3>
 
-				      <p>Desea Cambiar las Claves de Seguridad</p>
-				    </div>
-				    <div class="icon">
-				      <i class="fa fa-user-secret"></i>
-				    </div>
-				    <a href="{{ url('/Usuario/Update_Signature') }}" class="small-box-footer">Cambiar <i class="fa fa-arrow-circle-right"></i></a>
-				 </div>
 			</div>
             <div class="card">
                 <div class="card-header" data-background-color="blue">
@@ -36,20 +25,21 @@
 		            </p>
 		            <p>Documentación referente:</p>
 			            <center>
-			            	<a target="_blank" href="{{ url('docs/Manual de Usuario.pdf') }}" class="btn btn-primary" id="menu-toggle"> Manual <br> de Usuario</a> 
+			            	<a target="_blank" href="{{ url('docs/Manual de Usuario.pdf') }}" class="btn btn-primary" id="menu-toggle"> Manual <br> de Usuario</a>
 			                <a target="_blank" href="{{ url('docs/RgInterno.pdf') }}" class="btn btn-primary" id="menu-toggle">
 			                	Reglamento <br> Interno UPTAEB
-			                </a> 
+			                </a>
 			                <a target="_blank" href="{{ url('docs/RgEva.pdf') }}"  class="btn btn-primary" id="menu-toggle">
 			                	Reglamento Interno de Evaluacion <br> del Rendimiento Estudiantil
 			                </a>
 			            </center>
             	</div>{{--FIN CARDCONTENT--}}
 			</div>{{--FIN CARD--}}
-		</div>{{--FIN COL--}}				
+		</div>{{--FIN COL--}}
 		<div class="col-md-5 col-md-offset-1">
 			<div class="card">
 			    <div class="card-header" data-background-color="blue">
+            <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Datos de tus plane como coordinador y profesor"></i>
 			        <h4 class="title">Panel de Notificaciones</h4>
 			    </div>
 				<div class="card-content">
@@ -64,12 +54,12 @@
 			             		@if(isset($Planes))
 					              	@foreach($Planes as $plan)
 					                	<tr>
-					            
+
 						                  <th>Plan</th>
 						                  <th>Unidad</th>
 						                  <th>Seccion</th>
 						                  <th>Status</th>
-						                  
+
 						                  <th style="width: 30px">Progreso</th>
 						                  <th style="width: 2px">%</th>
 
@@ -91,7 +81,7 @@
 						                 		 	{{$plan['turno']}}
 						                 		</b>
 						                  	</td>
-						                  
+
 						                    @if($plan['status']=='FAIL')
 							                    <td><b>FALLIDO </b></td>
 							                    <td>
@@ -105,9 +95,9 @@
 								                </td>
 									        @else
 							                    <td><b>{{$plan['status']}} </b></td>
-							                    <td>	
+							                    <td>
 										            <div class="progress progress-xs">
-									                    <div class="progress-bar progress-bar-green" style="width: {{$plan['porcentaje']}}%"> 		
+									                    <div class="progress-bar progress-bar-green" style="width: {{$plan['porcentaje']}}%">
 									                    </div>
 									                </div>
 									            </td>
@@ -127,7 +117,7 @@
 								                    	</tr>
 								                    	<tr>
 								                    		<td>
-								                    			<img style="display:auto;width: 100%; border: 0;max-width: 30px;max-height:50px; padding: 0px;" src="{{ url('/img/iconos/16x16/exclamation-mark.png') }}" width="10" height="10"/> 
+								                    			<img style="display:auto;width: 100%; border: 0;max-width: 30px;max-height:50px; padding: 0px;" src="{{ url('/img/iconos/16x16/exclamation-mark.png') }}" width="10" height="10"/>
 								                    		</td>
 								                    		<td>
 								                    			<center><b>{{$eval['unidad']}}</center></b>
