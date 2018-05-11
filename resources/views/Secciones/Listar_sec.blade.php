@@ -21,6 +21,7 @@
                     <th>Codigo Seccion</th>
                     <th>Turno</th>
                     <th>Trayecto</th>
+                    <th>Accion</th>
 
                  
                 </thead>

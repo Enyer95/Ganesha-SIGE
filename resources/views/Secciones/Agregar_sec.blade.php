@@ -4,7 +4,7 @@
 			<div class="modal-header"> 
 			    <button type="button" class="close" data-dismiss="modal">x</button>
 				<div class="box-header with-border">
-    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Ingrese los datos de la nueva seccion"></i>
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Ingrese los datos de la nueva seccion<br>-Si la seccion contriene todas las unidades ingresadas al trayecto, seleccione 'Todas las Unidades'<br>-En cambio si la seccion solo impartira algunas unidades seleccione 'Seleccionar Unidades'. Alli busque y seleccione las unidades a impartir"></i>
 					<h3 class="box-title">Agregar Seccion</h3>
 				</div>
 
