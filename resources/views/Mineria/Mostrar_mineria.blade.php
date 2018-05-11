@@ -29,6 +29,16 @@
                         </section><br><hr>
 
                         <div class="card-content">
+                                <div >
+                                    <label>Centroides =</label>
+                                    @for ($i = 0; $i <count($centroides) ; $i++)
+                                        <br>---Centroide {{ $i+1 }}->[ 
+                                        @for ($j = 0; $j <count($centroides[$i]) ; $j++)
+                                            <br>---------> {{ $centroides[$i][$j]}}
+                                        @endfor
+                                        <br>---]
+                                    @endfor
+                                </div>
                             <div >
                                 <label> Tabla Normal</label>
                                 <table id="Normal" class="table table-bordered table-responsive">

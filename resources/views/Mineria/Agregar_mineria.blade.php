@@ -70,6 +70,11 @@
                                             <input type="number" min="0" id="minimo" name="minimo" required>
                                                 hasta
                                             <input type="number" min="0" id="maximo" name="maximo" required>
+                                            <br>
+                                            <label for="uni_crr">
+                                              Cantidad de centroides 
+                                            </label> <br>
+                                            <input type="number" min="0" name="centroides" required>
 
                                         </div>
                                     </div>
