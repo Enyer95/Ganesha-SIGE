@@ -13,6 +13,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="card">
                         <div class="card-header" data-background-color="blue">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Tabla de Acciones ralizadas en el sistema<br>Si desea exportar los datos visualizados solo seleccione el formato a exportar y luego la ubicacion de respaldo"></i>
                             <h4 class="title">Bitacora</h4>
                             <p class="category">Lista de Movimientos</p>
                         </div>
