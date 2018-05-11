@@ -13,6 +13,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="card">
                         <div class="card-header" data-background-color="blue">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Gestion de Secciones por trayectos"></i>
                             <h4 class="title">Gestion de  Secciones</h4>
                             <p class="category">Lista de  Secciones</p>
                         </div><!--fin card header-->

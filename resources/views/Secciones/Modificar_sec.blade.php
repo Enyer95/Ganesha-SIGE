@@ -7,6 +7,8 @@
 			<div class="modal-header"> 
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
 				<div class="box-header with-border">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Modifique los datos de la seccion actual"></i>
+					
 					<h3 class="box-title">Modificar Sección {{$secc->cod_sec}}</h3>
 				</div>
 
