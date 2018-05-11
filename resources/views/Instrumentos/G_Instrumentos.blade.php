@@ -14,6 +14,8 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="card">
                             <div class="card-header" data-background-color="blue">
+            <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Gestiones los Intrumentos que manejara en el lapso"></i>
+                                
                                 <h4 class="title">Gestion de Instrumentos</h4>
                                 <p class="category">Lista de Instrumentos</p>
                             </div> <!--Fin card header-->
@@ -29,13 +31,11 @@
                                 Gestion de Instrumentos
                             </li>
                           </ol>
-                        </section><br><hr>
+                        </section><hr>
                             <div class="card-content">
-                                <div class="col-md-offset-11">
-                                    <button type='button' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#ModalAgregar'> 
+                                    <button type='button' class='col-md-offset-11 btn btn-primary btn-xs' data-toggle='modal' data-target='#ModalAgregar'> 
                                         Agregar
                                     </button>
-                                </div><br><!--fin col-->
                         @include('flash::message')
                                 
                                 @include('Instrumentos.ListarInstrumentos')
