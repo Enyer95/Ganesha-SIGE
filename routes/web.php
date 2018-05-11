@@ -207,5 +207,6 @@ Route::group(['middleware'=>'permisos'],function(){
 	Route::get( '/queryMineria/{query}', 'controllermineria@queryMineria');
 	Route::post( '/minaValores', 'controllermineria@minaValores');
 
+//Respaldos
 
-	//Route::get('form_cargar_datos_usuarios', 'controlleralumnos@form_cargar_datos_usuarios');
+	Route::get('/Respaldo', 'controllerrespaldo@respaldo');
