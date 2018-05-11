@@ -25,7 +25,6 @@
                         </div>
                     </div>
                     <div class="box-body">
-                    <h4>Descripción</h4>
                         {{ $ej->descripcion }}
                     </div>
                 </div>

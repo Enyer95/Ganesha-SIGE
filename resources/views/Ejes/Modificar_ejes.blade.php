@@ -8,7 +8,10 @@
 			<div class="modal-header"> 
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
 				<div class="box-header with-border">
-					<h3 class="box-title">Modificar Datos del Eje {{$ej->nom_eje}}</h3>
+            <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Modificar datos del eje actual"></i>
+				
+					<h3 class="box-title">
+					Modificar Datos del Eje {{$ej->nom_eje}}</h3>
 				</div>
 
             <form role="form" method="POST" action="{{ route('controllerejes.update', $ej->cod_eje) }}">

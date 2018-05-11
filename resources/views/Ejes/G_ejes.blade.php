@@ -15,7 +15,9 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="card">
                             <div class="card-header" data-background-color="blue">
-                                <h4 class="title">Gestion de Ejes</h4>
+                                <h4 class="title">
+            <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Gestiones los Ejes que tributan las unidades curriculares"></i>
+                                Gestion de Ejes</h4>
                                 <p class="category">Lista de Ejes</p>
                             </div>
 
