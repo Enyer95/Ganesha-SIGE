@@ -6,6 +6,7 @@
 
 @include('roles.AgregarRoles')
 @include('roles.ModificarRoles')
+@include('roles.VisualizarRoles')
 
 
 
@@ -16,6 +17,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="card">
                             <div class="card-header" data-background-color="blue">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Lista Roles que rigen a los usuarios del sistema<br>Aqui podra gestionar los Roles"></i>
                                 <h4 class="title">Gestion de Roles</h4>
                                 <p class="category">Listado</p>
                             </div> <!--Fin card header-->

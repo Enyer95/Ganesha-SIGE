@@ -8,7 +8,8 @@
 			<div class="modal-header"> 
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
 				<div class="box-header with-border">
-					<h3 class="box-title">Modificar Datos de la Unidad {{$rol->nom_rol}}</h3>
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Modifique las acciones que realiza el rol {{$rol->nom_rol}}"></i>
+					<h3 class="box-title">Modificar Datos del rol {{$rol->nom_rol}}</h3>
 				</div>
 
             <form role="form" method="POST" action="{{ route('controllerroles.update', $rol->id_rol) }}">
