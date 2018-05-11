@@ -9,6 +9,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="card">
                         <div class="card-header" data-background-color="blue">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="En este apartado podra transcribir las notas de las evaluaciones necesarias<br>Para ello seleccione las evaluaciones a transcribir y genere el corte"></i>
                             <h4 class="title">Gestion de Notas</h4>
                             <p class="category">Transcripción de Notas</p>
                         </div><!--fin card header-->

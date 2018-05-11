@@ -6,15 +6,17 @@
                     <div class="box box-info  collapsed-box">
                         <div class="box-header with-border">
                           <h3 class="box-title">
-                        <b> Unidad:</b> {{ $u->nom_uc}}<br>
-                        <b> Seccion: </b> {{ $pu->cod_seccion}}<br>
-                        @if(isset($secc))
-                        @foreach($secc as $sec)
-                        @if($sec->cod_sec == $pu->cod_seccion)
-                        <b>Turno:</b> {{ $sec->turno }}
-                        @endif
-                        @endforeach
-                        @endif
+                          <table>
+                                <b> Unidad:</b> {{ $u->nom_uc}}
+                                <b> Seccion: </b> {{ $pu->cod_seccion}}
+                                @if(isset($secc))
+                                    @foreach($secc as $sec)
+                                        @if($sec->cod_sec == $pu->cod_seccion)
+                                            <b>Turno:</b> {{ $sec->turno }}
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </table>
                             </h3>
                              @if(session()->has('msj') )
                                     <div class="alert alert-success">{{ session('msj') }}

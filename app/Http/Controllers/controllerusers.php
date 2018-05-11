@@ -47,7 +47,7 @@ class ControllerUsers extends Controller
             return redirect($request->route)->with(['tipoMsj'=>'success','msj'=> 'Proceda a realizar lo deseado','titulo'=> 'Exito']);
         }
         else {
-            return redirect('/home')->with(['tipoMsj'=>'error','msj'=> 'clave privada o publica incorrecta','titulo'=> 'Error']);
+            return redirect('/home')->with(['tipoMsj'=>'error','msj'=> 'clave incorrecta','titulo'=> 'Error']);
         }
     }
 

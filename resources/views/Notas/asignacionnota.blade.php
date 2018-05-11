@@ -11,6 +11,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="card">
                         <div class="card-header" data-background-color="blue">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Ingrese las notas por estudiante<br>Recuerde que estas no deben de ser mayor al cual fue ingresado al momento de agregar la evaluacion"></i>
                             <h4 class="title">Asignacion de Notas</h4>
                             <p class="category">Lista Estudiantes</p>
                         </div><!--fin card header-->

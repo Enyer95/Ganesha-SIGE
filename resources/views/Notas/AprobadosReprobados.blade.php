@@ -34,6 +34,7 @@
                <div class="alert alert-warning alert-dismissible">Los estudiantes que esten reprobados y tengan posibilidad de PER se mostraran en las dos listas
                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>
               @if(isset($listado))
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="En esta grafica puede visualizar la cantidad de estudiantes "></i>
                 <canvas id="pieChart" style="height:250px"></canvas>
                 <br>
                 <br>
@@ -43,6 +44,7 @@
                   <div class="box-body col-md-12">
                     @if($aprobados!=0)
                     <div class="col-md-4">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Estudiantes aprobados "></i>
                       <b> <label style="color: #58FAAC">◕</label>Estudiantes Aprobados</b> {{ $aprobados }}<br> <br>  
                       <table  border="1" style="border: 1px solid #58FAAC;" >
                         <thead>
@@ -74,6 +76,7 @@
 
                     @if($PERcount!=0)
                         <div class="col-md-4">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Estudiantes con opcion a per, recuerde que estos estudiantes se encuentran reprobados pero aun tiene opcion a per"></i>
                       <b> <label style="color: #FFBF00">◕</label> Con Opción a P.E.R. </b>{{ $PERcount }}<br> <br> 
                       <table  border="1" style="border: 1px solid #FFBF00;" >
                         <thead>
@@ -105,6 +108,7 @@
                     @endif
                     @if($reprobados!=0)
                         <div class="col-md-4">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Lista de estudiantes Reprobados, Recuerde que hay estudiantes que aunque estan reprobados tiene opcion a per"></i>
                       <b > <label style="color: #FF0000">◕</label> Estudiantes Reprobados </b>{{ $reprobados + $PERcount}}<br> <br> 
                       <table  border="1" style="border: 1px solid #FE2E2E;" >
                         <thead>
