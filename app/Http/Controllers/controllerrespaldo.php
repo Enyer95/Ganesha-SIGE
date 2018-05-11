@@ -3,13 +3,15 @@
 namespace GaneshaSIGE\Http\Controllers;
 
 use Illuminate\Http\Request;
-use BackupManager\Filesystems\Destination;
+use BackupManager\Manager;
 
 class controllerrespaldo extends Controller
 {
+
 	public function respaldo()
 	{
-		$manager = require 'bootstrap.php';
+		$manager = App::make(\BackupManager\Manager::class);
+
 		$manager
 		    ->makeBackup()
 		    ->run('development', [
