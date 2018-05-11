@@ -1,4 +1,6 @@
 @include('flash::message')
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Modifique los datos de los estudiantes de forma manual, al igual que los estudiantes que tributan esta unidad curricular<br>Si desea ingresar un estudiante que no se encuentre en la seccion ingrese alguno de sus datos en el campo 'Agregar Estudiante', <br>Si dicho estudiante no se encuentra es esta lista precione el boton 'Nuevo estudiante', para agregar los datos del nuevo estudiante"></i>
+	<button type="button" id="tomoEstu" class="btn btn-primary btn-xs col-md-offset-10">Nuevo Estudiante</button>
 	<div class="form-group col-md-10">
 	    <select class="select2" id="alumSelec" style="width: 100%;"  data-placeholder="Agregar Estudiante" >
 	    @if(isset($alumnos))			
@@ -7,6 +9,7 @@
  	     		@endforeach
 		@endif
 	    </select>
+
 	</div>
 
 	
@@ -60,7 +63,6 @@
 	    </tbody>
   	</table>
   	 <button type="button" id="guardar" class="btn btn-primary btn-xs pull-right">Guardar</button>
-	<button type="button" id="tomoEstu" class="btn btn-primary btn-xs ">Nuevo Estudiante</button>
 </form>
 @section('customjs')
 

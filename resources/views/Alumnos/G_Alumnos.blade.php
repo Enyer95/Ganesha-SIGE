@@ -12,6 +12,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="card">
                             <div class="card-header" data-background-color="blue">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Gestion de estudiantes. Para ello tiene 2 opciones para ingresar los estudiantes, de forma manual o por listado<br>Para la segunda opcion descarge la plantilla y carge los estudiantes en ella.<br>para la Primera opcion Seleccione manual y comiense la carga"></i>
                                 <h4 class="title">Gestion de Alumnos</h4>
                                 <p class="category">Seleccion Secciones</p>
                             </div> <!--Fin card header-->

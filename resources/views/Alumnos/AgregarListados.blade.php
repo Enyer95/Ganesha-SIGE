@@ -7,6 +7,7 @@
 					<div class="modal-header"> 
 					    <button type="button" class="close" data-dismiss="modal">x</button>
 						<div class="box-header with-border">
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Para ingresar el listado de los estudiante cargue el listado y seleccione si dicho listado contiene los correos de los estudiantes o no<br>Cabe destacar que para gozar de todas las bondades de Ganesha lo ideal es ingresar los correos de los estudiantes"></i>
 							<h3 class="box-title">Agregar listados {{ $master2 }}</h3>
 						</div>
 					</div>

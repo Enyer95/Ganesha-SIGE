@@ -1,5 +1,7 @@
 @include('flash::message')
+    <i class="fa fa-question quest" data-toggle="tooltip"  data-html="true" data-placement="bottom" title="Para agregar los estudiantes en la seccion, ingrese alguno de sus datos en el cajetin 'Buscar Estudiante' y seleccione para agregarlo a la seccion, <br>Si dicho estudiante no se encuentra es esta lista precione el boton 'Nuevo estudiante', para agregar los datos del nuevo estudiante"></i>
 
+	<button type="button" id="tomoEstu" class="btn btn-primary btn-xs col-md-offset-10">Nuevo Estudiante</button>
 <div class="form-group col-md-10">
     <select class="select2" id="alumSelec" style="width: 100%;"  data-placeholder="Buscar Estudiante" >
 	@if(isset($alumnos))			
@@ -40,7 +42,6 @@
             </tr>
 	    </tbody>
   	</table>
-  	<button type="button" id="tomoEstu" class="btn btn-primary btn-xs ">Nuevo Estudiante</button>
 
   	  <button type="button" id="guardar" class="btn btn-primary btn-xs pull-right">Guardar</button>
 
