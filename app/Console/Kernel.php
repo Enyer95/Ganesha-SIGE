@@ -4,6 +4,7 @@ namespace GaneshaSIGE\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use BackupManager\Filesystems\Destination;
 
 class Kernel extends ConsoleKernel
 {
@@ -22,11 +23,12 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule)
-    {
-        // $schedule->command('inspire')
-        //          ->hourly();
-    }
+         protected function schedule(Schedule $schedule) {
+            $schedule->call(function () {
+                $manager = \App::make(\BackupManager\Manager::class);
+                $manager->makeBackup()->run('pgsql', [new Destination('backup', 'backup'.\Carbon::now().'.sql')], 'gzip');
+            })->everyMinute();
+         }
 
     /**
      * Register the Closure based commands for the application.

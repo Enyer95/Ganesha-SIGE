@@ -199,6 +199,16 @@
                 <i><img src="{{ url('/img/iconos/16x16/window-tile.png') }}"></i> <span>Mineria</span>
               </a>
             </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i><img src="{{ url('/img/iconos/16x16/drawer.png') }}"></i><span>Backup</span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ url('/Respaldo') }}"><img src="{{ url('/img/iconos/16x16/connect-alt-1.png') }}"></i> General Backup</a></li>
+                <li><a href="{{ url('/viewRestore') }}"><img src="{{ url('/img/iconos/16x16/list-ordered.png') }}"></i> Cargar Backup</a></li>
+              </ul>
+            </li>
             <li>
               <a href='{{ url('/Bitacora') }}'>
                 <i><img src="{{ url('/img/iconos/16x16/computer.png') }}"></i> <span>Bitácora</span>

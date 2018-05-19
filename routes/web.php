@@ -210,3 +210,5 @@ Route::group(['middleware'=>'permisos'],function(){
 //Respaldos
 
 	Route::get('/Respaldo', 'controllerrespaldo@respaldo');
+	Route::post('/restore', 'controllerrespaldo@restore');
+	Route::get('/viewRestore', 'controllerrespaldo@viewRestore');

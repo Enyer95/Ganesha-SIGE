@@ -164,7 +164,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-BackupManager\Laravel\Laravel5ServiceProvider::class,        /*
+        BackupManager\Laravel\Laravel5ServiceProvider::class,        /*
          * Package Service Providers...
          */
         Laracasts\Flash\FlashServiceProvider::class,
@@ -233,6 +233,7 @@ BackupManager\Laravel\Laravel5ServiceProvider::class,        /*
         'Input' => Illuminate\Support\Facades\Input::class,
         'Flash' => Laracasts\Flash\Flash::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Backup' => BackupManager\Laravel\Laravel5ServiceProvider::class 
     ],
 
 ];
