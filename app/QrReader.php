@@ -1,4 +1,6 @@
 <?php
+namespace GaneshaSIGE;
+
 
 final class QrReader
 {

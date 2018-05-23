@@ -17,7 +17,6 @@ use QrCode;
 use GaneshaSIGE\QrReader;
 
 
-
 use GaneshaSIGE\ModelPlandeEvaluacion;
 
 class User extends Authenticatable
