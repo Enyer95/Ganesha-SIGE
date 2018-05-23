@@ -49,7 +49,7 @@ class HomeController extends Controller
    // dd($today,$time);
 
     if ($today >= '1' && $today <= '3') {
-      return redirect('home')->with(['tipoMsj'=>'error','msj'=> 'Se aproxima la fecha de actualización de Firmas','titulo'=> 'Error']);
+      return redirect('home')->with(['tipoMsj'=>'error','msj'=> 'Se aproxima la fecha de actualización de Clave','titulo'=> 'Error']);
     }
 
     if ($today == '09' && $time == '9:00' ){
@@ -59,156 +59,111 @@ class HomeController extends Controller
   }
 
   
-      public function index(){
-        $user= User::find(1);
-        $when = Carbon::now();
-        $when = $when->format('Y-m-d');
-        $progreso='FALSE';
-        //dd($when);
-        
-        HomeController::PrivatePassChanged();
-        HomeController::SeguimientosEva();
+public function index(){
+ # dd(ModelPnf::enabled());
+  if (ModelPnf::where('cod_pnf', 1)->value('enabled')) {
+    $user= User::find(1);
+    $when = Carbon::now();
+    $when = $when->format('Y-m-d');
+    $progreso='FALSE';
+    //dd($when);
+    
+    HomeController::PrivatePassChanged();
+    HomeController::mostrarprueba();
+    HomeController::SeguimientosEva();
 
-        HomeController::mostrarprueba();
+    $id=Auth::user()-> id;
+    $seccion=array();
+    $Panel=array();
+    $Eva=array();
+    $cuentaevafallas=0;
 
-        HomeController::SeguimientosEva();
-
-        $id=Auth::user()-> id;
-        $seccion=array();
-        $Panel=array();
-        $Eva=array();
-        $cuentaevafallas=0;
-
-        $ids=DB::table('mpuentemasters')->where('id_usu', $id)->pluck('id_uc_sec');
-        //dd($ids);
-        $cuentaasig=count($ids);
-        if($cuentaasig>0){
-
-        //BUSCO PLANES DE ESTE USER
-        foreach ($ids as $key => $value){
-          $Planes[] = ModelPlandeEvaluacion::where('cod_sec_plan',$value)->get();
-          }
-
-          $Planes=array_flatten($Planes);
-          //dd($Planes);
-
-          //VALIDAMOS QUE EXISTAN PLANES PARA CONTINUAR
-
-            $validar=count($Planes);
-            //dd($validar);
-            #SI NO EXISTEN VACIAMOS A PANEL
-            if($validar == 0){
-              $Panel='';
-            }
-
-
-            //SI EXISTEN LLENAMOS PANEL
-            else{
-                 $i=0;
-                  foreach ($Planes as $key => $value){
-                    //dd($value);
-                    $dataunisec[$i]=DB::table('mpuentemasters')->where('id_uc_sec', $value->cod_sec_plan)->get();
-                    $dataunisec2=array_flatten($dataunisec);
-                    //dd($dataunisec2);
-
-                    $seccion[$i]=ModelSeccion::where('cod_sec',$dataunisec2[$i]->cod_seccion)->get();
-
-                    $unidad[$i]=ModelUnidadCurricular::where('cod_uc_pnf',$dataunisec2[$i]->cod_unidad)->get();
-                   // dd($PlanFallos);
-                    $i=$i+1;
-                  }
-
-
-
-                //VERIFICAMOS QUE SE HAYAN LLENADO LAS VAR
-                $cuentasec=count($seccion);
-                $unidad=array_flatten($unidad); //APLANAMOS EL ARRAY
-
-
-                //SI SE LLENAN CONTINUAMOS
-                if ($cuentasec>0){ //ABRE IF
-                  $seccion=array_flatten($seccion);
-
-                  //RECORREMOS PLANES Y LLENAMOS DATOS DE CABECERAS
-                  $o=0;
-                  foreach ($Planes as $key => $value){
-                      $nom_uc=$unidad[$o]->nom_uc;
-                      $seccionpaso=$seccion[$o]->cod_sec;
-                      $turno=$seccion[$o]->turno;
-                      $status=$value->status;
-                      $id_plan=$value->id_plan;
-
-                   // dd($seccionpaso,$nom_uc,$status,$turno);
-
-
-                       $evacuentabuenaporce=ModelEvaluacion::where('id_plan_eva',$id_plan)->where('fec_res','!=','2000-01-01')->get();
-                      // dd($when,'dasd');
-
-                        $evasporce=ModelEvaluacion::where('id_plan_eva',$value->id_plan)->get();
-                        //CUENTO EVAS PARA PORCENTAJE
-
-                        $evacuentaporce=count($evasporce);
-                        //dd($evasfallas);
-                        $evacuentabuenaporce=count($evacuentabuenaporce);
-
-
-                       // dd($evacuentabuenaporce);
-                        $porcentaje=$evacuentabuenaporce*100/$evacuentaporce;
-                        //dd($porc);
-                       $Panel[$o]= ['Plan' => $id_plan,'unidad'=> $nom_uc,'seccion'=>$seccionpaso,'turno'=>$turno,'status'=>$status, 'porcentaje'=>$porcentaje];
-                      // dd($Panel);
-                    $o=$o+1;
-                  }//CIERRA IF CUENTASEC
-                        //VALIDAMOS SI EL PLAN RECORRIDO ESTA FALLO
-                      if($value->status=='FAIL'){
-
-                        $evasfallas=ModelEvaluacion::where('id_plan_eva',$value->id_plan)->where('fec_prop','<',$when)->get();
-
-                        //dd($evasfallas);
-                        $cuentaevafallas=count($evasfallas);
-                        //dd($cuentaevafallas);
-                         if($cuentaevafallas>0){
-                                $evas=ModelEvaluacion::where('id_plan_eva',$value->id_plan)->get();
-
-                                //RECORRO EVASFALLAS
-
-                                 foreach ($evasfallas as $key => $value) {
-
-                                    $unidad=$value->unidad;
-                                    $fecha=$value->fec_prop;
-                                    $idinst=$value->id_inst_eva;
-                                    $instrumento=ModelInstrumento::where('id_inst',$idinst)->pluck('tip_inst');
-                                    $pond=$value->ponderacion;
-                                    $contenido=$value->contenido;
-
-
-
-                                    $idpeva=$value->id_plan_eva;
-
-                                    $Eva[]=['idpeva'=>$idpeva,'unidad'=>$unidad, 'fecha'=>$fecha, 'instrumento'=>$instrumento[0],'pond'=>$pond,'contenido'=>$contenido];
-                                   // dd($Eva);
-                                  }//FIN FOR EVAFALLAS
-
-                         }
-                         //FIN IF CUENTAFALLAS
-                       }//fin if planes fallos
-
-                }//CIERROFOREACH PLANES
-
-            }//FIN ELSE DE ASIGNACIONES
-          if($validar==0){
-
-          return view('home');
+    $ids=DB::table('mpuentemasters')->where('id_usu', $id)->pluck('id_uc_sec');
+    $cuentaasig=count($ids);
+    if($cuentaasig>0){
+      //BUSCO PLANES DE ESTE USER
+      foreach ($ids as $key => $value){
+        $Planes[] = ModelPlandeEvaluacion::where('cod_sec_plan',$value)->get();
+      }
+      $Planes=array_flatten($Planes);
+      $validar=count($Planes);
+      #SI NO EXISTEN VACIAMOS A PANEL
+      if($validar == 0){
+        $Panel='';
+      }
+      else{
+        $i=0;
+        foreach ($Planes as $key => $value){
+          $dataunisec[$i]=DB::table('mpuentemasters')->where('id_uc_sec', $value->cod_sec_plan)->get();
+          $dataunisec2=array_flatten($dataunisec);
+          $seccion[$i]=ModelSeccion::where('cod_sec',$dataunisec2[$i]->cod_seccion)->get();
+          $unidad[$i]=ModelUnidadCurricular::where('cod_uc_pnf',$dataunisec2[$i]->cod_unidad)->get();
+          $i=$i+1;
         }
-        else
-          //dd($Panel);
-          return view('home')->with(['Planes'=>$Panel, 'Eva'=>$Eva, 'porcentaje'=>$porcentaje, 'progreso'=>$progreso]);
-        }
-            else{
-            return view('home')->with('progreso',$progreso);
-
-        }
+        //VERIFICAMOS QUE SE HAYAN LLENADO LAS VAR
+        $cuentasec=count($seccion);
+        $unidad=array_flatten($unidad); //APLANAMOS EL ARRAY
+        if ($cuentasec>0){ //ABRE IF
+          $seccion=array_flatten($seccion);
+          //RECORREMOS PLANES Y LLENAMOS DATOS DE CABECERAS
+          $o=0;
+          foreach ($Planes as $key => $value){
+            $nom_uc=$unidad[$o]->nom_uc;
+            $seccionpaso=$seccion[$o]->cod_sec;
+            $turno=$seccion[$o]->turno;
+            $status=$value->status;
+            $id_plan=$value->id_plan;
+            $evacuentabuenaporce=ModelEvaluacion::where('id_plan_eva',$id_plan)->where('fec_res','!=','2000-01-01')->get();
+            $evasporce=ModelEvaluacion::where('id_plan_eva',$value->id_plan)->get();
+            //CUENTO EVAS PARA PORCENTAJE
+            $evacuentaporce=count($evasporce);
+            $evacuentabuenaporce=count($evacuentabuenaporce);
+            $porcentaje=$evacuentabuenaporce*100/$evacuentaporce;
+            $Panel[$o]= ['Plan' => $id_plan,'unidad'=> $nom_uc,'seccion'=>$seccionpaso,'turno'=>$turno,'status'=>$status, 'porcentaje'=>$porcentaje];
+            $o=$o+1;
+          }//CIERRA IF CUENTASEC
+                    //VALIDAMOS SI EL PLAN RECORRIDO ESTA FALLO
+          if($value->status=='FAIL'){
+            $evasfallas=ModelEvaluacion::where('id_plan_eva',$value->id_plan)->where('fec_prop','<',$when)->get();
+            $cuentaevafallas=count($evasfallas);
+            if($cuentaevafallas>0){
+              $evas=ModelEvaluacion::where('id_plan_eva',$value->id_plan)->get();
+              //RECORRO EVASFALLAS
+              foreach ($evasfallas as $key => $value) {
+                $unidad=$value->unidad;
+                $fecha=$value->fec_prop;
+                $idinst=$value->id_inst_eva;
+                $instrumento=ModelInstrumento::where('id_inst',$idinst)->pluck('tip_inst');
+                $pond=$value->ponderacion;
+                $contenido=$value->contenido;
+                $idpeva=$value->id_plan_eva;
+                $Eva[]=['idpeva'=>$idpeva,'unidad'=>$unidad, 'fecha'=>$fecha, 'instrumento'=>$instrumento[0],'pond'=>$pond,'contenido'=>$contenido];
+              }//FIN FOR EVAFALLAS
+            }//FIN IF CUENTAFALLAS
+          }//fin if planes fallos
+        }//CIERROFOREACH PLANES
+      }//FIN ELSE DE ASIGNACIONES
+      if($validar==0){
+        return view('home');
+      }
+      else
+        return view('home')->with(['Planes'=>$Panel, 'Eva'=>$Eva, 'porcentaje'=>$porcentaje, 'progreso'=>$progreso]);
     }
+    else{
+      return view('home')->with('progreso',$progreso);
+    }
+  }
+  else{
+    foreach (Auth::user()->roles as $rol) {
+      if ($rol->nom_rol == 'Administrador') {
+        return view('Configuracion.main')->with('status', 'Guardar');
+      }
+      else{
+        return view('Configuracion.main')->with('status', 'No');
+      }
+    }
+  }
+}
 
 
 

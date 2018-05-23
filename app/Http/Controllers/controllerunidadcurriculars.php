@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use GaneshaSIGE\User;
 
 use GaneshaSIGE\ModelEje;
+use GaneshaSIGE\ModelPnf;
 //ESTE ES EL NOMBRE DEL MODELO
 
 use GaneshaSIGE\ModelUnidadCurricular;
@@ -51,7 +52,7 @@ class ControllerUnidadCurriculars extends Controller
 
         $ejes = ModelEje::all();
         //Creo una variable la cual Me trae toda la informacion que contiene la base de datos
-        return view('Uni_Crr/G_uc')->with(['uni_crr' => $uni_crr, 'ejes' => $ejes]);
+        return view('Uni_Crr/G_uc')->with(['uni_crr' => $uni_crr, 'ejes' => $ejes, 'status' => ModelUnidadCurricular::max_uni(ModelPnf::MaxUni())]);
 
         //Y Retorno a la vista una variable a la cual le asigno lo que contiene la variable anterior creada
     }

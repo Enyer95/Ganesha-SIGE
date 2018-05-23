@@ -32,4 +32,15 @@ class ModelUnidadCurricular extends Model
                 return true;
         return false;
     }
+
+    public static function max_uni($max){
+        if (count(ModelUnidadCurricular::all())<$max) {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
 }

@@ -33,12 +33,13 @@
                           </ol>
                         </section><br><hr>
                         <div class="card-content">
-                        
-                            <div class="col-md-offset-11">
-                                <button type='button' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#ModalAgregar'> 
-                                    Agregar
-                                </button>
-                            </div><br><!--fin colcard-->
+                            @if ($status)
+                                <div class="col-md-offset-11">
+                                    <button type='button' class='btn btn-primary btn-xs' data-toggle='modal' data-target='#ModalAgregar'> 
+                                        Agregar
+                                    </button>
+                                </div>
+                            @endif<br><!--fin colcard-->
                         @include('flash::message')
                             
                             @include('Uni_Crr.Listar_uc')
