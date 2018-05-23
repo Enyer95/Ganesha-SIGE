@@ -17,10 +17,13 @@ use GaneshaSIGE\ModelBitacora;
 use Crypt;
 use Illuminate\Support\Collection as Collection;
 use QrCode;
-use GaneshaSIGE\QrReader;
+
+
 
 use Storage;
+
 //indico al modelo que utilizara la Clase de Storage
+
 class ControllerUsers extends Controller
 {
 
