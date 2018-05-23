@@ -20,6 +20,10 @@ class PnfSeeder extends Seeder
         DB::table('mpnfs') -> insert([
         'cod_pnf'=>'001',
         'nom_pnf'=>'PNF INFORMATICA',
+        'cant_secc'=>1,
+        'cant_uni'=>1,
+        'tiempo_respaldo'=>1,
+        'fecha_final'=>Carbon::now(),
         'created_at'=>Carbon::now(),
         'updated_at'=>Carbon::now()
         ]);

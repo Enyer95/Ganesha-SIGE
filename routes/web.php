@@ -212,3 +212,6 @@ Route::group(['middleware'=>'permisos'],function(){
 	Route::get('/Respaldo', 'controllerrespaldo@respaldo');
 	Route::post('/restore', 'controllerrespaldo@restore');
 	Route::get('/viewRestore', 'controllerrespaldo@viewRestore');
+
+//PNF
+	Route::post('/config', 'controllerpnf@config');

@@ -172,19 +172,12 @@ class User extends Authenticatable
 
         foreach ($users as $user) {
             $userm= New User;
-
             $userm->private_pass =$userm -> passPublic;
-
             $private_pass=$userm->private_pass;
-  
             $user->generateNotifySignature((new UpdateSignature($user,$private_pass)));
-
             $ci=$user->ci_usu;
-     
             $userm->qrGenerador($ci,$private_pass);
-
         }
-        
         return redirect('home')->with(['tipoMsj' => 'success', 'msj' => 'Las firmas fueron enviadas con Exito', 'titulo' => 'Firma Enviada']);
     }
 

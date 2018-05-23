@@ -37,6 +37,9 @@
                         </button>
                         @endif
                         <div class="card-content">
+                        <div class="col-md">
+                            <h2>Debe registrar primero las unidades curriculares min(4)</h2>
+                          </div><!--fin colcard-->
 
                             @include('Secciones.Listar_sec')
                         </div>
@@ -50,11 +53,6 @@
         </div>
     </div>
 
-    @if($cuentauc< 3)
-     <div class="col-md">
-      <h2>Debe registrar primero las unidades curriculares min(4)</h2>
-      </div><!--fin colcard-->
-@endif
 
    @endsection
 @section('customjs')
