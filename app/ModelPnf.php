@@ -14,7 +14,11 @@ class ModelPnf extends Model
     protected $fillable = [
       'nom_pnf','cant_secc','cant_uni','tiempo_respaldo','fecha_final','enabled'	
     ];
+
     public static function MaxUni(){
 		return self::where('cod_pnf', 1)->value('cant_uni');
+    }
+    public static function MaxSec(){
+		return self::where('cod_pnf', 1)->value('cant_secc');
     }
 }

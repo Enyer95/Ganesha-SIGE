@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use GaneshaSIGE\ModelSeccion;
 use GaneshaSIGE\ModelUnidadCurricular;
 use GaneshaSIGE\ModelBitacora;
+use GaneshaSIGE\ModelPnf;
 use GaneshaSIGE\User;
 use \Auth as Auth;
 use Carbon\Carbon;
@@ -38,7 +39,7 @@ class controllersecciones extends Controller
           $master=DB::table('mpuentemasters')->where('cod_seccion','<>','NULL')->get();
 
         //Creo una variable la cual Me trae toda la informacion que contiene la base de datos
-        return view('Secciones/G_Secciones')->with(['sec' => $sec,'seccuenta' => $seccuenta,'sec2' => $sec2, 'uni_crr' => $uni_crr,'cuentauc' => $cuentauc, 'master' => $master]);
+        return view('Secciones/G_Secciones')->with(['sec' => $sec,'seccuenta' => $seccuenta,'sec2' => $sec2, 'uni_crr' => $uni_crr,'cuentauc' => $cuentauc, 'master' => $master,'max'=> ModelPnf::MaxUni(), 'status' => ModelSeccion::max_secc(ModelPnf::MaxSec())]);
 
         //Y Retorno a la vista una variable a la cual le asigno lo que contiene la variable anterior creada
     }

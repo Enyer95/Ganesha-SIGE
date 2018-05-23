@@ -31,7 +31,7 @@
 
                         </section><hr>
                         @include('flash::message')
-                        @if($cuentauc>3)
+                        @if($cuentauc>$max && $status)
                         <button type='button' class='btn btn-primary btn-xs col-md-offset-11' data-toggle='modal' data-target='#ModalAgregar'>
                           Agregar
                         </button>

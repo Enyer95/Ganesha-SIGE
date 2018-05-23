@@ -41,5 +41,16 @@ class ModelSeccion extends Model
             return false;
         return true;
     }  
+
+    public static function max_secc($max){
+        if (count(self::all())<$max) {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
     
 }

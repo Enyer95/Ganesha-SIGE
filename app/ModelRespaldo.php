@@ -4,7 +4,7 @@ namespace GaneshaSIGE;
 
 use Illuminate\Database\Eloquent\Model;
 use BackupManager\Manager;
-use BackupManager\Filesystems\Destination;
+use BackupManager\Filesystems\Destination; 
 use Carbon\Carbon;
 
 class ModelRespaldo extends Model
