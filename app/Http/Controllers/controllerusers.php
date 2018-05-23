@@ -362,7 +362,7 @@ class ControllerUsers extends Controller
             'tlf'=> 'required',
             'email'=> 'required',
             'img_perfil'=> 'required',
-            'password' => 'required|min:6|regex:/^.*(?=.{1,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|', 
+            'password' => 'required|min:6|confirmed|regex:/^.*(?=.{2,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|', 
 
         ]);
             $idbit = Auth::user() -> ci_usu;
