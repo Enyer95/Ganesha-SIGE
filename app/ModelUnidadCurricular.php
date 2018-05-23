@@ -34,7 +34,7 @@ class ModelUnidadCurricular extends Model
     }
 
     public static function max_uni($max){
-        if (count(ModelUnidadCurricular::all())<$max) {
+        if (count(self::all())<$max) {
             return true;
         }
         else
