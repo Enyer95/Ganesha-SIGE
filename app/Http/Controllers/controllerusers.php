@@ -362,6 +362,7 @@ class ControllerUsers extends Controller
             'tlf'=> 'required',
             'email'=> 'required',
             'img_perfil'=> 'required',
+            'password' => 'required|min:6|regex:/^.*(?=.{1,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|', 
 
         ]);
             $idbit = Auth::user() -> ci_usu;
@@ -438,6 +439,7 @@ class ControllerUsers extends Controller
             'email'=> 'required',
             'img_perfil'=> 'required',
             'id_rol'=> 'required',
+
         ]);
 
 
