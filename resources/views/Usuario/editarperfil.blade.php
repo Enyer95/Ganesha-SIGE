@@ -46,6 +46,7 @@
                                                 {{ csrf_field() }}
 
                                                 <div class="box-body">
+
                                                   <div class="form-group">
                                                     <label for="cedula">Cedula</label>
                                                      <input type="text" class="form-control" name="ci_usu"  maxlength="8" minlength="7" onKeyPress="return soloNumeros(event)" placeholder="Ej. xxxxxxxxx" required  value="{{ $mod_usuario->ci_usu}}">
@@ -78,6 +79,11 @@
                                                     </div>
                                                          <div class="col-md-5">
                                                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+
+                                                         <label>Ingrese caracteres:
+                                                         |AZ-az |0-9| !$#%]</label>
+                                                         <br>
+
                                                             <label for="password" class="control-label">Contraseña</label>
                                                             <div>
                                                                 <input id="password" type="password" class="form-control" name="password" required>
