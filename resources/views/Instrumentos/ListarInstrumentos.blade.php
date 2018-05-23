@@ -29,9 +29,7 @@
                             <td>
                                 <div class="tools">
                                   <a href="{{ url('/controllerinstrumentos/'.$inst->id_inst.'/eliminar') }}"  id="eliminar" onclick="verifico(this)" >
-                                    <button type='submit' class='btn btn-danger btn-xs'>
-                                      <i><img src="{{ url('/img/iconos/16x16/cancel.png') }}"></i>
-                                    </button>
+                                 
                                   </a>          
                                     <button type='button' class='btn btn-primary btn-xs' data-toggle='modal' data-target="#ModalModificar_{{$inst->id_inst}}"> 
                                         <img src="{{ url('/img/iconos/16x16/edit.png') }}">

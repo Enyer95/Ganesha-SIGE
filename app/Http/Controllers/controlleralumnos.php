@@ -179,8 +179,10 @@ class controlleralumnos extends Controller
 
                         else{
                         $varact=array(DB::table('mestudiantes')->where('ci_est', $buscame)->get());
+                        //REVISION
                        // dd($estuarchivo['ci_est']);
-                             $varact=array_flatten($varact,$estuarchivo['nom_est']);
+                        // dd($varact, $buscame);
+                          // $varact=array_flatten($varact,$estuarchivo['nom_est']);
                         if($valid){
                          DB::table('mestudiantes')->where('ci_est', $buscame)->update(['nom_est'=>$estuarchivo['nom_est'],'ape_est'=>$estuarchivo['ape_est'],'email'=>$estuarchivo['email']]);
                        }

@@ -209,7 +209,7 @@ class User extends Authenticatable
 
     public function qrScan(){
         $ci_usu = Auth::user()->ci_usu;
-        $qrcode = new \QrReader('../public/qr_image/'.$ci_usu.'.png');
+        $qrcode = new QrReader('../public/qr_image/'.$ci_usu.'.png');
         $text = $qrcode->text(); //return decoded text from QR Code
         return $text;
     }
