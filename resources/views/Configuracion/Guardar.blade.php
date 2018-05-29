@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
              	<label>Fecha de Culminación</label>
-                <input type="date" placeholder="4" name="date"   class="form-control date" required autofocus>
+                <input type="date" placeholder="4" name="date" class="form-control date" required autofocus>
                 @if($errors->has('secciones'))
 					<span style="color:red;">{{ $errors->first('secciones') }}</span>
 				@endif
@@ -43,3 +43,10 @@
         <!-- /.col -->
 	</div><button type="submit" class="btn btn-primary">Guardar</button>
 	</form>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+
+
+              {{ csrf_field() }}
+             <button type="submit" class="btn btn-primary"><i class="fa fa-power-off" ></i> Salir</button>
+
+    </form>

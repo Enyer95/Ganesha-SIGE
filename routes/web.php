@@ -67,18 +67,18 @@ Route::group(['middleware'=>'permisos'],function(){
 		Route::get('/controllerejes/{cod_eje}/eliminar', 'controllerejes@eliminar')->name('eliminar.ejes');
 		Route::post('controllerejes/{cod_eje}', 'controllerejes@agregar')->name('crear.ejes');
 
-		Route::get( 'Plan_Evaluaciones/{id_plan}/Asignar', 'controllerplanevaluaciones@Asignar')->name('asignar.planhijo');
-		Route::post('modificarplanevaluaciones/{id_plan}', 'controllerplanevaluaciones@update2')->name('modificar.planhijo');
-		Route::get( 'Plan_Evaluaciones/imprimirMaster/{cod_unidad}', 'controllerplanevaluaciones@imprimirmaster')->name('imprimir.plan');
-		Route::get('/controllerplanevaluaciones/{id_plan}/eliminar', 'controllerplanevaluaciones@eliminar')->name('eliminar.plan');
-		Route::get( 'Plan_Evaluaciones/imprimir/{id_plan}', 'controllerplanevaluaciones@imprimir')->name('imprimir.plan');
-
 
 });
 
 
 ///RUTAS PUBLICAS////////////*********************
 //RUTA PLANES
+
+		Route::get( 'Plan_Evaluaciones/{id_plan}/Asignar', 'controllerplanevaluaciones@Asignar')->name('asignar.planhijo');
+		Route::post('modificarplanevaluaciones/{id_plan}', 'controllerplanevaluaciones@update2')->name('modificar.planhijo');
+		Route::get( 'Plan_Evaluaciones/imprimirMaster/{cod_unidad}', 'controllerplanevaluaciones@imprimirmaster')->name('imprimir.plan');
+		Route::get('/controllerplanevaluaciones/{id_plan}/eliminar', 'controllerplanevaluaciones@eliminar')->name('eliminar.plan');
+		Route::get( 'Plan_Evaluaciones/imprimir/{id_plan}', 'controllerplanevaluaciones@imprimir')->name('imprimir.plan');
 
 	Route::post('controllerplanevaluaciones/{id_plan}', 'controllerplanevaluaciones@agregar')->name('crear.planmaestro');
 
@@ -215,3 +215,5 @@ Route::group(['middleware'=>'permisos'],function(){
 
 //PNF
 	Route::post('/config', 'controllerpnf@config');
+	Route::get('/configUpdate', 'controllerpnf@configUpdate');
+	Route::post('/configUpdate', 'controllerpnf@configupdates');

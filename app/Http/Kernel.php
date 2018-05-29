@@ -15,6 +15,8 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \GaneshaSIGE\Http\Middleware\FrameHeadersMiddleware::class
+        
     ];
 
     /**
@@ -22,6 +24,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    
     protected $middlewareGroups = [
         'web' => [
             \GaneshaSIGE\Http\Middleware\EncryptCookies::class,

@@ -52,8 +52,13 @@
                 <ul class='dropdown-menu' >
                   <li><a href="{{ url('/edit/perfil/') }}">Configuración de usuario</a></li>
                     <li><a target="_blank" href="{{ url('/docs/Manual de Usuario.pdf') }}">Manual de usuario</a></li>
-
-                  <li role='separator' class='divider'></li>
+<li>
+                      @foreach (Auth::user()->roles as $rol) 
+                        @if ($rol->nom_rol == 'Administrador') 
+                          <a href="{{ url('/configUpdate') }}">Actualizacion de Configuracion Basica</a>
+                        @endif
+                      @endforeach
+    </li>              <li role='separator' class='divider'></li>
                   <!-- Authentication Links -->
 
                     <li>
