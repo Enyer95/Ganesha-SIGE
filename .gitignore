@@ -1,4 +1,5 @@
 /public/storage
+/public/qr_image
 /public/img_perfil
 /storage/*.key
 /vendor
