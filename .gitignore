@@ -1,4 +1,5 @@
 /public/storage
+/public/img_perfil
 /storage/*.key
 /vendor
 Homestead.json
