@@ -302,7 +302,7 @@ class ControllerUsers extends Controller
                 $bitacora->registra($idbit,$accion,$observacion,$name);
                 $rolee=$request -> id_rol;
                 $cuentarol=count($rolee);
-                //dd($rolee,$cuentarol);
+                //dd($rolee,$cuentarol);Respaldo
 
                 if($cuentarol>0){
 
@@ -313,7 +313,7 @@ class ControllerUsers extends Controller
                             //se guarda toda la informacion en la MasterPuente
                             $uc = ModelUnidadCurricular::find($request->materia);
                             $secc = 'NULL';
-                            //Guardo el registro en la MasterPuente
+                            //Guardo el registro en la MasterPuenteRespaldo
                             //con los datos del usuario, seccion, unidad y le indico que es coordinador
                             foreach ($uc as $uc) {
 
@@ -535,7 +535,11 @@ class ControllerUsers extends Controller
             $secc='NULL';
 
                 $materias=$request->materia;
-           // dd($asignadas,$materias);
+               
+                if ($materias==null) {
+                    $materias=0;
+                }
+
                 $cuentamateria=count($materias);
 
                 #SI NO HAY MATERIAS SE BORRAN LAS ASIGNACIONES QUE TENIA ANTES
@@ -570,13 +574,13 @@ class ControllerUsers extends Controller
                             }
                             else{
                                      $puentetabla=DB::table('mpuentemasters')->where('cod_seccion',$secc)->where('cod_unidad',$mat)->where('id_usu',2)->where('coordinador', 'TRUE')->value('id_uc_sec');
-                                dd($puentetabla,$mat,$id,$secc);
+                               // dd($puentetabla,$mat,$id,$secc);
                                      $cuenta=count($puentetabla);
-                                     dd($cuenta,$puentetabla);
+                                   //  dd($cuenta,$puentetabla);
 
                                      //
                                 //dd($cuenta,$puentetabla);
-                                     //si encuentra materias registradas sin cordinador lo asigna al elegido
+                                     //si encuentra materias registradadds sin cordinador lo asigna al elegido
                                      if($cuenta > 0){
 
 
