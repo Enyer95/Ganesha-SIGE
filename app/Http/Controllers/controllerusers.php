@@ -45,7 +45,6 @@ class ControllerUsers extends Controller
 ////////////////////////////////////////////////////////////////////////////////
     public function scanQr(Request $request){
         $user = New User;
-
         if ($request->pass == Crypt::decrypt($user->qrScan())) {
             return redirect($request->route)->with(['tipoMsj'=>'success','msj'=> 'Proceda a realizar lo deseado','titulo'=> 'Exito']);
         }
@@ -273,7 +272,7 @@ class ControllerUsers extends Controller
             $usuario -> tlf = $request -> tlf;
             $usuario -> email = $request -> email;
             $usuario -> password = bcrypt($request -> ci_usu);
-
+            $usuario -> status = false;
             $passPrivate = $usuario -> passPublic;
 
             $usuario ->qrGenerador($request->ci_usu, $passPrivate);
@@ -380,6 +379,8 @@ class ControllerUsers extends Controller
             $usuario -> tlf = $request -> tlf;
             $usuario -> email = $request -> email;
             $usuario -> password = bcrypt($request -> password);
+            $usuario -> status = true;
+
 
             if($request->img_perfil == 'usericon.png') {
               $img = $request->img_perfil;
@@ -536,6 +537,7 @@ class ControllerUsers extends Controller
                 $materias=$request->materia;
            // dd($asignadas,$materias);
                 $cuentamateria=count($materias);
+
                 #SI NO HAY MATERIAS SE BORRAN LAS ASIGNACIONES QUE TENIA ANTES
                     if($cuentamateria==0){
                     $cuentaasignada=count($asignadas);
@@ -568,8 +570,10 @@ class ControllerUsers extends Controller
                             }
                             else{
                                      $puentetabla=DB::table('mpuentemasters')->where('cod_seccion',$secc)->where('cod_unidad',$mat)->where('id_usu',2)->where('coordinador', 'TRUE')->value('id_uc_sec');
-
+                                dd($puentetabla,$mat,$id,$secc);
                                      $cuenta=count($puentetabla);
+                                     dd($cuenta,$puentetabla);
+
                                      //
                                 //dd($cuenta,$puentetabla);
                                      //si encuentra materias registradas sin cordinador lo asigna al elegido

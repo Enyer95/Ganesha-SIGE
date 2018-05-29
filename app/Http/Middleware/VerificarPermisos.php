@@ -18,17 +18,27 @@ class VerificarPermisos
     public function handle($request, Closure $next)
     {
        #dd(\Request::route()->getName());
-        foreach (\Auth::user()->roles as $rol) {
+      
+
+        if (\Auth::user()->status == TRUE) {
+
+            foreach (\Auth::user()->roles as $rol) {
             
-            if($rol->tieneModulo(\Request::route()->getName())){
-                return $next($request);
-            }
+                if($rol->tieneModulo(\Request::route()->getName())){
+                    return $next($request);
+                }
 
-            else{
-                Flash::warning('<h4><b>No posee las permisologías necesarias para la accion:'.$rol->tieneModulo(\Request::route()->getName()).'</b><h4>');
+                else{
 
-                return back();
+                    return back()->with(['tipoMsj'=>'error','msj'=> '<h4><b>No posee las permisologías necesarias para la accion:'.$rol->tieneModulo(\Request::route()->getName()).'</b><h4>','titulo'=> 'Acceso Negado']);;
+                }
             }
+        }
+        else{
+
+          
+                    return redirect('edit/perfil/')->with(['tipoMsj'=>'error','msj'=> 'Para usar el sistema, debes actualizar tu contraseña. Por favor actualiza tu perfil','titulo'=> 'Acceso Negado']);
+
         }
 
     }

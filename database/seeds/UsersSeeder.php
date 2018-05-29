@@ -25,7 +25,9 @@ class UsersSeeder extends Seeder
         'tlf'=>$faker->randomNumber($nbDigits=9),
         'img_perfil'=>'1491785651_index.jpeg',
         'created_at'=>Carbon::now(),
-        'updated_at'=>Carbon::now()
+        'updated_at'=>Carbon::now(),
+        'status'=>true,
+
         ]);
 
          DB::table('users') -> insert([
@@ -37,7 +39,9 @@ class UsersSeeder extends Seeder
         'tlf'=>$faker->randomNumber($nbDigits=9),
         'img_perfil'=>'1491785651_index.jpeg',
         'created_at'=>Carbon::now(),
-        'updated_at'=>Carbon::now()
+        'updated_at'=>Carbon::now(),
+        'status'=>true,
+
         ]);
 
          DB::table('users') -> insert([
@@ -49,7 +53,9 @@ class UsersSeeder extends Seeder
         'tlf'=>$faker->randomNumber($nbDigits=9),
         'img_perfil'=>'1491785651_index.jpeg',
         'created_at'=>Carbon::now(),
-        'updated_at'=>Carbon::now()
+        'updated_at'=>Carbon::now(),
+        'status'=>true,
+
         ]);
     }
 }
