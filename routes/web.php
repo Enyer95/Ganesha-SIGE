@@ -108,8 +108,8 @@ Route::group(['middleware'=>'permisos'],function(){
 
 
 	//RUTA CORREO
-		Route::get('/correo/pruebacorreo', 'emailcontroller@mostrarprueba');
-		Route::get('/correo/enviar_correo', 'emailcontroller@enviar');
+		Route::get('/correo/pruebacorreo', 'Emailcontroller@mostrarprueba');
+		Route::get('/correo/enviar_correo', 'Emailcontroller@enviar');
 
 	///RUTAS INSTRUMENTOS//
 		Route::get('/instrumentos/vista', 'controllerinstrumentos@mostrar');

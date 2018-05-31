@@ -20,28 +20,7 @@ use \Auth as Auth;
 
 use Illuminate\Support\Facades\Mail; 
 
-        // FUNCION SEGUIMIENTO
-
-      public function SeguimientosEva(){
-
-      $date = Carbon::now();
-      $date = $date->format('d-m-Y');
-
-          $TodasEval=ModelEvaluacion::all();
-          foreach ($TodasEval as $EvaMonitor) {
-            if($EvaMonitor->fec_prop > $date )
-              if ($EvaMonitor->fec_res <>'00-00-00') {
-              $PlanMonitor = ModelPlandeEvaluacion::find($EvaMonitor->id_plan_eva);
-                $PlanMonitor->status =='FAIL';
-                dd($PlanMonitor);
-                $PlanMonitor->save();
-
-              }
-          }
-        }
-
-
-class EmailController extends Controller
+class Emailcontroller extends Controller
 {
           public function mostrarprueba(){
             $now = Carbon::now();
@@ -65,38 +44,6 @@ class EmailController extends Controller
                  }
             
                  }
- // public function SeguimientosPlan(){
- //            $now = Carbon::now();
- //            $now = $now->format('l'); 
-     
- //            $count=0; //SI ES LUNES HAS EL BETA
-
- //            if($now === 'Sunday' || $now === 'Monday'){
-         
- //                    //consulto todos los planes
- //                  $PlanFallo = ModelPlandeEvaluacion::where('status', 'FAIL')->pluck('usuplan');
-                    
- //                  //si estan fallos entra en condicion  
- //                    foreach ($PlanFallo as $PlanFallox) {
- //                    $busca=$PlanFallox[$count];
-
- //                    $busqeda = User::where('id',$busca)->get(['email']);
- //                    dd($busqueda);
- //                    //$destinatario=($busqeda['email']);
-
- //                    $contenido='Saludos desde Ganesha, nos debes evaluaciones';
- //                    $asunto='Regañoprueba GaneshaSIGE';
-                    
- //                    EmailController::enviar($destinatario); 
- //                    }
- //                $count=$count+1;
-                    
- //                 }
-            
- //                 }
-            
-
-
      public function enviar($destinatario)
     {
     
