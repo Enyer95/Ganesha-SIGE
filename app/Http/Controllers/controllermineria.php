@@ -23,18 +23,27 @@ class controllermineria extends Controller
 	{
 		$cabeceras=explode(',', $request->celdas);
 		$cantidad=$request->maximo-$request->minimo;
+		
 		$results = DB::select('SELECT '.$request->newQuery.' OFFSET '.$request->minimo.' ROWS FETCH NEXT '.$cantidad.' ROWS ONLY;');
-		$discretizacion = ModelMineria::discretizacion($cabeceras,$cantidad,DB::select('SELECT '.$request->newQuery.' OFFSET '.$request->minimo.' ROWS FETCH NEXT '.$cantidad.' ROWS ONLY;'));
-		$normalizacion = ModelMineria::discre($cabeceras,$cantidad,DB::select('SELECT '.$request->newQuery.' OFFSET '.$request->minimo.' ROWS FETCH NEXT '.$cantidad.' ROWS ONLY;'));
+		
+		$discretizacion = ModelMineria::discretizacion($cabeceras,$cantidad,ModelMineria::arrayCopy($results));
+		
+		foreach ($discretizacion as $key) {
+			$datosDiscretizados[] = $key;
+		}
+		$datosDiscretizados[0] = ModelMineria::arrayCopy($discretizacion[0]);
 
-		foreach ($normalizacion as $key) {
+		$normalizacion = ModelMineria::normalizacion($cantidad,$datosDiscretizados,$cabeceras);
+
+		foreach ($datosDiscretizados[0] as $key) {
 			$dato[]=array_flatten(collect($key)->toArray());
 		}
-		foreach($dato as $key => $d) {
-		  $dato[] = ModelMineria::normaliseValue($d, sqrt($d[0]*$d[0] + $d[1] * $d[1]));
-		}
+
 		$centroides=ModelMineria::kMeans($dato, $request->centroides)['centroides'];
-		return view('Mineria/Mostrar_mineria')->with(['discretizacion' => $discretizacion,'normal'=>$results,'normalizacion'=>$normalizacion,'celdas'=>$cabeceras,'centroides'=>$centroides]);
+
+		#dd($centroides);
+
+		return view('Mineria/Mostrar_mineria')->with(['discretizacion' => $discretizacion[0],'normal'=>$results,'normalizacion'=>$normalizacion,'celdas'=>$cabeceras,'centroides'=>$centroides]);
 
 	}
 }
